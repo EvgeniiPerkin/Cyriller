@@ -1,11 +1,22 @@
 
 public enum GendersEnum {
 	/**Неопределенный*/
-	Undefined,
+	Undefined(0),
 	/**Мужской*/
-	Masculine,
+	Masculine(1),
 	/**Женский*/
-	Feminine,
+	Feminine(2),
 	/**Средний*/
-	Neuter
+	Neuter(3);
+    public final int value;
+
+
+    GendersEnum(int value){
+        this.value = value;
+    }
+
+
+    public int getValue() {
+        return value;
+    }
 }
