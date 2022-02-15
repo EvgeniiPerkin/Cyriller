@@ -72,15 +72,15 @@ public class CyrName {
         declinePatronymic = patronymicAfter == null || patronymicAfter.isEmpty();
         patronymic = this.ProperCase(patronymic);
         
-        if (caseNumber < 1 || caseNumber > 6){
+        if (caseNumber < 1 || caseNumber > 6) {
             caseNumber = 1;
         }
 
-        if (gender < 0 || gender > 2){
+        if (gender < 0 || gender > 2) {
             gender = 0;
         }
         
-        if (gender == 0){
+        if (gender == 0) {
             gender = patronymic.endsWith("на") ? 2 : 1;
         }
 
@@ -90,7 +90,7 @@ public class CyrName {
         surnameNew = "";
         index = surnameOld.indexOf("-");
         
-        while (index > 0){
+        while (index > 0) {
             temp = this.ProperCase(surnameOld.substring(0, index));
             surnameNew = surnameNew + this.DeclineSurname(temp, caseNumber, isFeminine) + "-";
             surnameOld = surnameOld.substring(index + 1);
@@ -101,11 +101,138 @@ public class CyrName {
         surnameNew = surnameNew + this.DeclineSurname(temp, caseNumber, isFeminine);
         surname = surnameNew;
         
-		return null;
+        switch (caseNumber){
+            case 1:
+                if (inputShorten) {
+                    name = this.Shorten(name);
+                    patronymic = this.Shorten(patronymic);
+                }
+                break;
+            case 2:
+                name = this.DeclineNameGenitive(name, isFeminine, inputShorten);
+
+                if (declinePatronymic || inputShorten) {
+                    patronymic = this.DeclinePatronymicGenitive(patronymic, isFeminine, inputShorten);
+                }
+                break;
+
+            case 3:
+                name = this.DeclineNameDative(name, isFeminine, inputShorten);
+
+                if (declinePatronymic || inputShorten) {
+                    patronymic = this.DeclinePatronymicDative(patronymic, isFeminine, inputShorten);
+                }
+                break;
+
+            case 4:
+                name = this.DeclineNameAccusative(name, isFeminine, inputShorten);
+
+                if (declinePatronymic || inputShorten) {
+                    patronymic = this.DeclinePatronymicAccusative(patronymic, isFeminine, inputShorten);
+                }
+                break;
+
+            case 5:
+                name = this.DeclineNameInstrumental(name, isFeminine, inputShorten);
+
+                if (declinePatronymic || inputShorten) {
+                    patronymic = this.DeclinePatronymicInstrumental(patronymic, isFeminine, inputShorten);
+                }
+                break;
+
+            case 6:
+                name = this.DeclineNamePrepositional(name, isFeminine, inputShorten);
+
+                if (declinePatronymic || inputShorten) {
+                    patronymic = this.DeclinePatronymicPrepositional(patronymic, isFeminine, inputShorten);
+                }
+                break;
+        }
+
+        if (!inputShorten){
+            patronymic = patronymicBefore + patronymic + patronymicAfter;
+        }
+
+        return new String[] { surname, name, patronymic };
 	}
 	public String[] Decline(String fullName, int cases, int gender, boolean shorten) {
 		return null;
 	}
+
+    public String DeclineNameGenitive(String name, boolean isFeminine, boolean shorten)
+    {
+        String temp;
+
+        if (this.IsShorten(name)){
+            return name;
+        }
+
+        if (shorten) {
+            name = this.Shorten(name);
+        }
+        else{
+            temp = name;
+
+            switch (SubstringRight(name, 3).ToLower()) {
+                case "лев":
+                    name = SetEnd(name, 2, "ьва");
+                    break;
+            }
+
+            if (name == temp) {
+                switch (SubstringRight(name, 2)){
+                    case "ей":
+                    case "ий":
+                    case "ай":
+                        name = SetEnd(name, "я");
+                        break;
+                    case "ел":
+                        name = SetEnd(name, "ла");
+                        break;
+                    case "ец":
+                        name = SetEnd(name, "ца");
+                        break;
+                    case "га":
+                    case "жа":
+                    case "ка":
+                    case "ха":
+                    case "ча":
+                    case "ща":
+                        name = SetEnd(name, "и");
+                        break;
+                }
+            }
+
+            if (name == temp) {
+                switch (SubstringRight(name, 1)){
+                    case "а":
+                        name = SetEnd(name, "ы");
+                        break;
+                    case "е":
+                    case "ё":
+                    case "и":
+                    case "о":
+                    case "у":
+                    case "э":
+                    case "ю":
+                        break;
+                    case "я":
+                        name = SetEnd(name, "и");
+                        break;
+                    case "ь":
+                        name = SetEnd(name, (isFeminine ? "и" : "я"));
+                        break;
+                    default:
+                        if (!isFeminine)
+                            name = name + "а";
+                        break;
+                }
+            }
+
+        }
+
+        return name;
+    }
 	/**
 	 * Склоняет фамилию в указанный падеж.
 	 * @param surname Фамилия, в именительном падеже.
@@ -239,4 +366,54 @@ public class CyrName {
 		}
 		return value.substring(0, 1).toUpperCase() + value.substring(1);
 	}
+	/**
+	 * Сокращает указанное значение. Пример: "Петровна" -> "П.", "Николай" -> "Н.".
+	 * @param value
+	 * @return Возвращает null, если входное значение является пустой строкой или null.
+	 */
+	protected String Shorten(String value){
+        if (isNullOrWhitespace(value)) {
+            return null;
+        }
+
+        String result = new String(new char[] { value.charAt(0), '.' });
+
+        return result;
+    }
+	/**
+	 * Указывает, является ли указанная строка нулевой, пустой или состоит только из пробелов.
+	 * @param s
+	 * @return
+	 */
+	public static boolean isNullOrWhitespace(String s) {
+	    return s == null || isWhitespace(s);
+
+	}
+	
+	private static boolean isWhitespace(String s) {
+	    int length = s.length();
+	    if (length > 0) {
+	        for (int i = 0; i < length; i++) {
+	            if (!Character.isWhitespace(s.charAt(i))) {
+	                return false;
+	            }
+	        }
+	        return true;
+	    }
+	    return false;
+	}
+	/**
+	 * Возвращает true, если входная строка является пустой, null или заканчивается на точку (.).
+	 * Пример: "Петровна" -> false, "Н." -> true.
+	 * @param value
+	 * @return 
+	 */
+	protected boolean IsShorten(String value)
+    {
+        if (value == null || value.isEmpty()) {
+        	return true;
+        }
+
+        return value.charAt(value.length() - 1) == '.';
+    }
 }
