@@ -44,6 +44,16 @@ public class CyrName {
 	public CyrResult Decline(String fullName, GendersEnum gender, boolean shorten) {
 		return null;
 	}
+	/**
+	 * Склоняет полное имя в указанный падеж.
+	 * @param inputSurname Фамилия, в именительном падеже.
+	 * @param inputName Имя, в именительном падеже.
+	 * @param inputPatronymic Отчество, в именительном падеже.
+	 * @param inputCase Падеж, в который нужно просклонять, где 1 – именительный, 2 – родительный, 3 – дательный, 4 – винительный, 5 – творительный, 6 – предложный.
+	 * @param inputGender Пол, указанного имени, где 0 – определить автоматически, 1 – мужской, 2 – женский.
+	 * @param inputShorten Сократить ли имя и отчество в результате склонения. К примеру, Иванов Иван Иванович, будет Иванов И. И.
+	 * @return Возвращает результат склонения в виде массива из трех элементов [Фамилия, Имя, Отчество].
+	 */
 	public String[] Decline(String inputSurname, String inputName, String inputPatronymic, int inputCase, int inputGender, boolean inputShorten) {
 		String temp = null;
         int caseNumber = 0;
@@ -155,8 +165,70 @@ public class CyrName {
 
         return new String[] { surname, name, patronymic };
 	}
+	/**
+	 * Склоняет полное имя в указанный падеж.
+	 * @param fullName Полное имя, в именительном падеже.
+	 * @param cases Падеж, в который нужно просклонять, где 1 – именительный, 2 – родительный, 3 – дательный, 4 – винительный, 5 – творительный, 6 – предложный.
+	 * @param gender Пол, указанного имени, где 0 – определить автоматически, 1 – мужской, 2 – женский.
+	 * @param shorten Сократить ли имя и отчество в результате склонения. К примеру, Иванов Иван Иванович, будет Иванов И. И.
+	 * @return Возвращает результат склонения в виде массива из трех элементов [Фамилия, Имя, Отчество].
+	 */
 	public String[] Decline(String fullName, int cases, int gender, boolean shorten) {
-		return null;
+		String surname = null;
+        String name = null;
+        String patronymic = null;
+        String str1 = null;
+        String str2 = null;
+        String str3 = null;
+        int spaceIndex = 0;
+
+        spaceIndex = fullName.indexOf(" ");
+
+        if (spaceIndex > 0) {
+            str1 = fullName.substring(0, spaceIndex).trim();
+            fullName = fullName.substring(spaceIndex).trim();
+
+            spaceIndex = fullName.indexOf(" ");
+
+            if (spaceIndex > 0) {
+                str2 = fullName.substring(0, spaceIndex).trim();
+                str3 = fullName.substring(spaceIndex).trim();
+            }
+            else {
+                str2 = fullName.trim();
+            }
+        }
+        else {
+            str1 = fullName.trim();
+        }
+
+        if (!(str3 == null || str3.isEmpty())) {
+            if (str2.endsWith("ич") || str2.endsWith("вна") || str2.endsWith("чна")) {
+                surname = str3;
+                name = str1;
+                patronymic = str2;
+            }
+            else {
+                surname = str1;
+                name = str2;
+                patronymic = str3;
+            }
+        }
+        else if (!(str2 == null || str2.isEmpty())) {
+            if (str2.endsWith("ич") || str2.endsWith("вна") || str2.endsWith("чна")) {
+                name = str1; ;
+                patronymic = str2;
+            }
+            else {
+                surname = str1;
+                name = str2;
+            }
+        }
+        else {
+            surname = str1;
+        }
+
+        return Decline(surname, name, patronymic, cases, gender, shorten);
 	}
 	/**
 	 * Родительный, Кого? Чего? (нет)
@@ -237,6 +309,537 @@ public class CyrName {
         }
 
         return name;
+    }
+    /**
+     * Дательный, Кому? Чему? (дам)
+     * @param name Имя, для склонения.
+     * @param isFeminine True, для женских имен.
+     * @param shorten Сократить ли имя, к примеру, Иван будет И.
+     * @return Возвращает результат склонения.
+     */
+    public String DeclineNameDative(String name, boolean isFeminine, boolean shorten) {
+        String temp;
+
+        if (this.IsShorten(name)) {
+            return name;
+        }
+
+        if (shorten) {
+            name = this.Shorten(name);
+        }
+        else {
+            temp = name;
+
+            switch (SubstringRight(name, 3).toLowerCase()) {
+                case "лев":
+                    name = SetEnd(name, 2, "ьву");
+                    break;
+            }
+
+            if (name == temp) {
+                switch (SubstringRight(name, 2)) {
+                    case "ей":
+                    case "ий":
+                    case "ай":
+                        name = SetEnd(name, "ю");
+                        break;
+                    case "ел":
+                        name = SetEnd(name, "лу");
+                        break;
+                    case "ец":
+                        name = SetEnd(name, "цу");
+                        break;
+                    case "ия":
+                        name = SetEnd(name, "ии");
+                        break;
+                }
+            }
+
+            if (name == temp) {
+                switch (SubstringRight(name, 1)) {
+                    case "а":
+                    case "я":
+                        name = SetEnd(name, "е");
+                        break;
+                    case "е":
+                    case "ё":
+                    case "и":
+                    case "о":
+                    case "у":
+                    case "э":
+                    case "ю":
+                        break;
+                    case "ь":
+                        name = SetEnd(name, (isFeminine ? "и" : "ю"));
+                        break;
+                    default:
+                        if (!isFeminine) {
+                            name = name + "у";
+                        }
+                        break;
+                }
+            }
+        }
+
+        return name;
+    }
+    /**
+     * Винительный, Кого? Что? (вижу)
+     * @param name Имя, для склонения.
+     * @param isFeminine True, для женских имен.
+     * @param shorten Сократить ли имя, к примеру, Иван будет И.
+     * @return Возвращает результат склонения.
+     */
+    public String DeclineNameAccusative(String name, boolean isFeminine, boolean shorten) {
+        String temp;
+
+        if (this.IsShorten(name)) {
+            return name;
+        }
+
+        if (shorten) {
+            name = this.Shorten(name);
+        }
+        else {
+            temp = name;
+
+            switch (SubstringRight(name, 3).toLowerCase()) {
+                case "лев":
+                    name = SetEnd(name, 2, "ьва");
+                    break;
+            }
+
+            if (name == temp) {
+                switch (SubstringRight(name, 2)) {
+                    case "ей":
+                    case "ий":
+                    case "ай":
+                        name = SetEnd(name, "я");
+                        break;
+                    case "ел":
+                        name = SetEnd(name, "ла");
+                        break;
+                    case "ец":
+                        name = SetEnd(name, "ца");
+                        break;
+                }
+            }
+
+            if (name == temp) {
+                switch (SubstringRight(name, 1)) {
+                    case "а":
+                        name = SetEnd(name, "у");
+                        break;
+                    case "е":
+                    case "ё":
+                    case "и":
+                    case "о":
+                    case "у":
+                    case "э":
+                    case "ю":
+                        break;
+                    case "я":
+                        name = SetEnd(name, "ю");
+                        break;
+                    case "ь":
+                        if (!isFeminine) {
+                            name = SetEnd(name, "я");
+                        }
+                        break;
+                    default:
+                        if (!isFeminine)
+                            name = name + "а";
+                        break;
+                }
+            }
+        }
+
+        return name;
+    }
+    /**
+     * Творительный, Кем? Чем? (горжусь)
+     * @param name Имя, для склонения.
+     * @param isFeminine True, для женских имен.
+     * @param shorten Сократить ли имя, к примеру, Иван будет И.
+     * @return Возвращает результат склонения.
+     */
+    public String DeclineNameInstrumental(String name, boolean isFeminine, boolean shorten) {
+        String temp;
+
+        if (this.IsShorten(name)) {
+            return name;
+        }
+
+        if (shorten) {
+            name = this.Shorten(name);
+        }
+        else {
+            temp = name;
+
+            switch (SubstringRight(name, 3).toLowerCase()) {
+                case "лев":
+                    name = SetEnd(name, 2, "ьвом");
+                    break;
+            }
+
+            if (name == temp) {
+                switch (SubstringRight(name, 2)) {
+                    case "ей":
+                    case "ий":
+                    case "ай":
+                        name = SetEnd(name, 1, "ем");
+                        break;
+                    case "ел":
+                        name = SetEnd(name, 2, "лом");
+                        break;
+                    case "ец":
+                        name = SetEnd(name, 2, "цом");
+                        break;
+                    case "жа":
+                    case "ца":
+                    case "ча":
+                    case "ша":
+                    case "ща":
+                        name = SetEnd(name, 1, "ей");
+                        break;
+                }
+            }
+
+            if (name == temp) {
+                switch (SubstringRight(name, 1)) {
+                    case "а":
+                        name = SetEnd(name, 1, "ой");
+                        break;
+                    case "е":
+                    case "ё":
+                    case "и":
+                    case "о":
+                    case "у":
+                    case "э":
+                    case "ю":
+                        break;
+                    case "я":
+                        name = SetEnd(name, 1, "ей");
+                        break;
+                    case "ь":
+                        name = SetEnd(name, 1, (isFeminine ? "ью" : "ем"));
+                        break;
+                    default:
+                        if (!isFeminine) {
+                            name = name + "ом";
+                        }
+                        break;
+                }
+            }
+        }
+
+        return name;
+    }
+    /**
+     * Предложный, О ком? О чем? (думаю)
+     * @param name Имя, для склонения.
+     * @param isFeminine True, для женских имен.
+     * @param shorten Сократить ли имя, к примеру, Иван будет И.
+     * @return Возвращает результат склонения.
+     */
+    public String DeclineNamePrepositional(String name, boolean isFeminine, boolean shorten) {
+        String temp;
+
+        if (this.IsShorten(name)) {
+            return name;
+        }
+
+        if (shorten) {
+            name = this.Shorten(name);
+        }
+        else {
+            temp = name;
+
+            switch (SubstringRight(name, 3).toLowerCase()) {
+                case "лев":
+                    name = SetEnd(name, 2, "ьве");
+                    break;
+            }
+
+            if (name == temp) {
+                switch (SubstringRight(name, 2)) {
+                    case "ей":
+                    case "ай":
+                        name = SetEnd(name, "е");
+                        break;
+                    case "ий":
+                        name = SetEnd(name, "и");
+                        break;
+                    case "ел":
+                        name = SetEnd(name, "ле");
+                        break;
+                    case "ец":
+                        name = SetEnd(name, "це");
+                        break;
+                    case "ия":
+                        name = SetEnd(name, "ии");
+                        break;
+                }
+            }
+
+            if (name == temp) {
+                switch (SubstringRight(name, 1)) {
+                    case "а":
+                    case "я":
+                        name = SetEnd(name, "е");
+                        break;
+                    case "е":
+                    case "ё":
+                    case "и":
+                    case "о":
+                    case "у":
+                    case "э":
+                    case "ю":
+                        break;
+                    case "ь":
+                        name = SetEnd(name, (isFeminine ? "и" : "е"));
+                        break;
+                    default:
+                        if (!isFeminine) {
+                            name = name + "е";
+                        }
+                        break;
+                }
+            }
+        }
+
+        return name;
+    }
+    /**
+     * Родительный, Кого? Чего? (нет)
+     * @param patronymic Отчество, для склонения.
+     * @param isFeminine True, для женских отчеств.
+     * @param shorten Сократить ли отчество, к примеру, Иванович будет И.
+     * @return Возвращает результат склонения.
+     */
+    public String DeclinePatronymicGenitive(String patronymic, boolean isFeminine, boolean shorten) {
+        if (this.IsShorten(patronymic)) {
+            return patronymic;
+        }
+
+        if (shorten) {
+            patronymic = this.Shorten(patronymic);
+        }
+        else {
+            switch (SubstringRight(patronymic, 1)) {
+                case "а":
+                    patronymic = SetEnd(patronymic, "ы");
+                    break;
+                case "е":
+                case "ё":
+                case "и":
+                case "о":
+                case "у":
+                case "э":
+                case "ю":
+                    break;
+                case "я":
+                    patronymic = SetEnd(patronymic, "и");
+                    break;
+                case "ь":
+                    patronymic = SetEnd(patronymic, (isFeminine ? "и" : "я"));
+                    break;
+                default:
+                    if (!isFeminine) {
+                        patronymic = patronymic + "а";
+                    }
+                    break;
+            }
+        }
+
+        return patronymic;
+    }
+    /**
+     * Дательный, Кому? Чему? (дам)
+     * @param patronymic Отчество, для склонения.
+     * @param isFeminine True, для женских отчеств.
+     * @param shorten Сократить ли отчество, к примеру, Иванович будет И.
+     * @return Возвращает результат склонения.
+     */
+    public String DeclinePatronymicDative(String patronymic, boolean isFeminine, boolean shorten) {
+        if (this.IsShorten(patronymic)) {
+            return patronymic;
+        }
+
+        if (shorten) {
+            patronymic = this.Shorten(patronymic);
+        }
+        else {
+            switch (SubstringRight(patronymic, 1)) {
+                case "а":
+                case "я":
+                    patronymic = SetEnd(patronymic, "е");
+                    break;
+                case "е":
+                case "ё":
+                case "и":
+                case "о":
+                case "у":
+                case "э":
+                case "ю":
+                    break;
+                case "ь":
+                    patronymic = SetEnd(patronymic, (isFeminine ? "и" : "ю"));
+                    break;
+                default:
+                    if (!isFeminine) {
+                        patronymic = patronymic + "у";
+                    }
+                    break;
+            }
+        }
+
+        return patronymic;
+    }
+    /**
+     * Винительный, Кого? Что? (вижу)
+     * @param patronymic Отчество, для склонения.
+     * @param isFeminine True, для женских отчеств.
+     * @param shorten Сократить ли отчество, к примеру, Иванович будет И.
+     * @return Возвращает результат склонения.
+     */
+    public String DeclinePatronymicAccusative(String patronymic, boolean isFeminine, boolean shorten) {
+        if (this.IsShorten(patronymic)) {
+            return patronymic;
+        }
+
+        if (shorten) {
+            patronymic = this.Shorten(patronymic);
+        }
+        else {
+            switch (SubstringRight(patronymic, 1)) {
+                case "а":
+                    patronymic = SetEnd(patronymic, "у");
+                    break;
+                case "е":
+                case "ё":
+                case "и":
+                case "о":
+                case "у":
+                case "э":
+                case "ю":
+                    break;
+                case "я":
+                    patronymic = SetEnd(patronymic, "ю");
+                    break;
+                case "ь":
+                    if (!isFeminine)
+                        patronymic = SetEnd(patronymic, "я");
+                    break;
+                default:
+                    if (!isFeminine)
+                        patronymic = patronymic + "а";
+                    break;
+            }
+        }
+
+        return patronymic;
+    }
+    /**
+     * Творительный, Кем? Чем? (горжусь)
+     * @param patronymic Отчество, для склонения.
+     * @param isFeminine True, для женских отчеств.
+     * @param shorten Сократить ли отчество, к примеру, Иванович будет И.
+     * @return Возвращает результат склонения.
+     */
+    public String DeclinePatronymicInstrumental(String patronymic, boolean isFeminine, boolean shorten) {
+        String temp;
+
+        if (this.IsShorten(patronymic)) {
+            return patronymic;
+        }
+
+        if (shorten) {
+            patronymic = this.Shorten(patronymic);
+        }
+        else {
+            temp = patronymic;
+
+            switch (SubstringRight(patronymic, 2)) {
+                case "ич":
+                    patronymic = patronymic + (patronymic.toLowerCase() == "ильич" ? "ом" : "ем");
+                    break;
+                case "на":
+                    patronymic = SetEnd(patronymic, 2, "ной");
+                    break;
+            }
+
+            if (patronymic == temp) {
+                switch (SubstringRight(patronymic, 1)) {
+                    case "а":
+                        patronymic = SetEnd(patronymic, 1, "ой");
+                        break;
+                    case "е":
+                    case "ё":
+                    case "и":
+                    case "о":
+                    case "у":
+                    case "э":
+                    case "ю":
+                        break;
+                    case "я":
+                        patronymic = SetEnd(patronymic, 1, "ей");
+                        break;
+                    case "ь":
+                        patronymic = SetEnd(patronymic, 1, (isFeminine ? "ью" : "ем"));
+                        break;
+                    default:
+                        if (!isFeminine) {
+                            patronymic = patronymic + "ом";
+                        }
+                        break;
+                }
+            }
+        }
+
+        return patronymic;
+    }
+    /**
+     * Творительный, Кем? Чем? (горжусь)
+     * @param patronymic Отчество, для склонения.
+     * @param isFeminine True, для женских отчеств.
+     * @param shorten Сократить ли отчество, к примеру, Иванович будет И.
+     * @return Возвращает результат склонения.
+     */
+    public String DeclinePatronymicPrepositional(String patronymic, boolean isFeminine, boolean shorten) {
+        if (this.IsShorten(patronymic)) {
+            return patronymic;
+        }
+
+        if (shorten) {
+            patronymic = this.Shorten(patronymic);
+        }
+        else {
+            switch (SubstringRight(patronymic, 1)) {
+                case "а":
+                case "я":
+                    patronymic = SetEnd(patronymic, "е");
+                    break;
+                case "е":
+                case "ё":
+                case "и":
+                case "о":
+                case "у":
+                case "э":
+                case "ю":
+                    break;
+                case "ь":
+                    patronymic = SetEnd(patronymic, (isFeminine ? "и" : "е"));
+                    break;
+                default:
+                    if (!isFeminine) {
+                        patronymic = patronymic + "е";
+                    }
+                    break;
+            }
+        }
+
+        return patronymic;
     }
 	/**
 	 * Склоняет фамилию в указанный падеж.
