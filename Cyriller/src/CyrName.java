@@ -6,19 +6,19 @@ public class CyrName {
 	private Pattern patronymicPrefixRegex;
 
 	public CyrName() {
-		patronymicSuffixRegex = Pattern.compile("((?i)[- ](((?i)(����)|(���)|(����))|([(?i)��](?i)���)))$", Pattern.UNICODE_CASE);
-		patronymicPrefixRegex = Pattern.compile("^((?i)���[- ])", Pattern.UNICODE_CASE);
+		patronymicSuffixRegex = Pattern.compile("((?i)[- ](((?i)(оглы)|(улы)|(уулу))|([(?i)кг](?i)ызы)))$", Pattern.UNICODE_CASE);
+		patronymicPrefixRegex = Pattern.compile("^((?i)ибн[- ])", Pattern.UNICODE_CASE);
 	}
 	
 	/**
-	 * �������� ������ ��� � ��������� �����.
-	 * @param surname �������, � ������������ ������.
-	 * @param name ���, � ������������ ������.
-	 * @param patronumic ��������, � ������������ ������.
-	 * @param cases �����, � ������� ����� �����������.
-	 * @param gender ���, ���������� �����
-	 * @param shorten ��������� �� ��� � �������� � ���������� ���������. � �������, ������ ���� ��������, ����� ������ �. �.
-	 * @return ���������� ��������� ���������
+	 * Склоняет полное имя в указанный падеж.
+	 * @param surname Фамилия, в именительном падеже.
+	 * @param name Имя, в именительном падеже.
+	 * @param patronumic Отчество, в именительном падеже.
+	 * @param cases Падеж, в который нужно просклонять.
+	 * @param gender Пол, указанного имени
+	 * @param shorten Сократить ли имя и отчество в результате склонения. К примеру, Иванов Иван Иванович, будет Иванов И. И.
+	 * @return Возвращает результат склонения в виде
 	 */
 	public CyrNameResult Decline(String surname, String name, String patronumic, CasesEnum cases, GendersEnum gender, boolean shorten) {
 		String[] values = this.Decline(surname, name, patronumic, cases.getValue(), gender.getValue(), shorten);
@@ -45,14 +45,14 @@ public class CyrName {
 		return null;
 	}
 	/**
-	 * �������� ������ ��� � ��������� �����. тест исправленной кодировки
-	 * @param inputSurname �������, � ������������ ������.
-	 * @param inputName ���, � ������������ ������.
-	 * @param inputPatronymic ��������, � ������������ ������.
-	 * @param inputCase �����, � ������� ����� �����������, ��� 1 � ������������, 2 � �����������, 3 � ���������, 4 � �����������, 5 � ������������, 6 � ����������.
-	 * @param inputGender ���, ���������� �����, ��� 0 � ���������� �������������, 1 � �������, 2 � �������.
-	 * @param inputShorten ��������� �� ��� � �������� � ���������� ���������. � �������, ������ ���� ��������, ����� ������ �. �.
-	 * @return ���������� ��������� ��������� � ���� ������� �� ���� ��������� [�������, ���, ��������].
+	 * Склоняет полное имя в указанный падеж.
+	 * @param inputSurname Фамилия, в именительном падеже.
+	 * @param inputName Имя, в именительном падеже.
+	 * @param inputPatronymic Отчество, в именительном падеже.
+	 * @param inputCase Падеж, в который нужно просклонять, где 1 – именительный, 2 – родительный, 3 – дательный, 4 – винительный, 5 – творительный, 6 – предложный.
+	 * @param inputGender Пол, указанного имени, где 0 – определить автоматически, 1 – мужской, 2 – женский.
+	 * @param inputShorten Сократить ли имя и отчество в результате склонения. К примеру, Иванов Иван Иванович, будет Иванов И. И.
+	 * @return Возвращает результат склонения в виде массива из трех элементов [Фамилия, Имя, Отчество].
 	 */
 	public String[] Decline(String inputSurname, String inputName, String inputPatronymic, int inputCase, int inputGender, boolean inputShorten) {
 		String temp = null;
@@ -91,7 +91,7 @@ public class CyrName {
         }
         
         if (gender == 0) {
-            gender = patronymic.endsWith("��") ? 2 : 1;
+            gender = patronymic.endsWith("на") ? 2 : 1;
         }
 
         isFeminine = (gender == 2);
@@ -166,12 +166,12 @@ public class CyrName {
         return new String[] { surname, name, patronymic };
 	}
 	/**
-	 * �������� ������ ��� � ��������� �����.
-	 * @param fullName ������ ���, � ������������ ������.
-	 * @param cases �����, � ������� ����� �����������, ��� 1 � ������������, 2 � �����������, 3 � ���������, 4 � �����������, 5 � ������������, 6 � ����������.
-	 * @param gender ���, ���������� �����, ��� 0 � ���������� �������������, 1 � �������, 2 � �������.
-	 * @param shorten ��������� �� ��� � �������� � ���������� ���������. � �������, ������ ���� ��������, ����� ������ �. �.
-	 * @return ���������� ��������� ��������� � ���� ������� �� ���� ��������� [�������, ���, ��������].
+	 * Склоняет полное имя в указанный падеж.
+	 * @param fullName Полное имя, в именительном падеже.
+	 * @param cases Падеж, в который нужно просклонять, где 1 – именительный, 2 – родительный, 3 – дательный, 4 – винительный, 5 – творительный, 6 – предложный.
+	 * @param gender Пол, указанного имени, где 0 – определить автоматически, 1 – мужской, 2 – женский.
+	 * @param shorten Сократить ли имя и отчество в результате склонения. К примеру, Иванов Иван Иванович, будет Иванов И. И.
+	 * @return Возвращает результат склонения в виде массива из трех элементов [Фамилия, Имя, Отчество].
 	 */
 	public String[] Decline(String fullName, int cases, int gender, boolean shorten) {
 		String surname = null;
@@ -203,7 +203,7 @@ public class CyrName {
         }
 
         if (!(str3 == null || str3.isEmpty())) {
-            if (str2.endsWith("��") || str2.endsWith("���") || str2.endsWith("���")) {
+            if (str2.endsWith("ич") || str2.endsWith("вна") || str2.endsWith("чна")) {
                 surname = str3;
                 name = str1;
                 patronymic = str2;
@@ -215,7 +215,7 @@ public class CyrName {
             }
         }
         else if (!(str2 == null || str2.isEmpty())) {
-            if (str2.endsWith("��") || str2.endsWith("���") || str2.endsWith("���")) {
+            if (str2.endsWith("ич") || str2.endsWith("вна") || str2.endsWith("чна")) {
                 name = str1; ;
                 patronymic = str2;
             }
@@ -1942,7 +1942,7 @@ public class CyrName {
         return result;
     }
 	/**
-	 * ���������, �������� �� ��������� ������ �������, ������ ��� ������� ������ �� ��������.
+	 *
 	 * @param s
 	 * @return
 	 */
@@ -1963,8 +1963,8 @@ public class CyrName {
 	    return false;
 	}
 	/**
-	 * ���������� true, ���� ������� ������ �������� ������, null ��� ������������� �� ����� (.).
-	 * ������: "��������" -> false, "�." -> true.
+	 * 
+	 * 
 	 * @param value
 	 * @return 
 	 */
