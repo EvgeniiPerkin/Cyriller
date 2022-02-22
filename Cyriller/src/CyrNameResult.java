@@ -1,18 +1,18 @@
 
 public class CyrNameResult {
 	
-	/**имя*/
+	/**РРјСЏ*/
 	private String name;
-	/**фамилия*/
+	/**Р¤Р°РјРёР»РёСЏ*/
 	private String surname;
-	/**отчество*/
+	/**РћС‚С‡РµСЃС‚РІРѕ*/
 	private String patronumic;
 	
 	/**
-	 * Создает экземпляр класса и заполняет значения surname, name, patronumic
-	 * @param surname - фамилия
-	 * @param name - имя
-	 * @param patronumic - отчество 
+	 * РЎРѕР·РґР°РµС‚ СЌРєР·РµРјРїР»СЏСЂ РєР»Р°СЃСЃР°
+	 * @param surname 
+	 * @param name
+	 * @param patronumic
 	 * @see CyrNameResult#CyrNameResult(String[])
 	 */
 	public CyrNameResult(String surname, String name, String patronumic) {
@@ -21,8 +21,8 @@ public class CyrNameResult {
 		this.patronumic = patronumic;
 	}
 	/**
-	 * Создает экземпляр класса и заполняет значения surname, ame, patronumic из массива
-	 * @param values - массив с инициалами
+	 * РЎРѕР·РґР°РµС‚ СЌРєР·РµРјРїР»СЏСЂ РєР»Р°СЃСЃР°
+	 * @param values
 	 * @see CyrNameResult#CyrNameResult(String, String, String)
 	 */
 	public CyrNameResult(String[] values) {
@@ -34,8 +34,8 @@ public class CyrNameResult {
 		}
 	}
 	/**
-	 * Возвращает инициалы в виде строки {@link CyrNameResult#name} +  {@link CyrNameResult#surname} + {@link CyrNameResult#patronumic}
-	 * @return инициалы
+	 * {@link CyrNameResult#name} +  {@link CyrNameResult#surname} + {@link CyrNameResult#patronumic}
+	 * @return РїРѕР»РЅРѕРµ РёРјСЏ
 	 */
 	public String getFullName(){
 		String[] values = new String[] {
@@ -64,22 +64,22 @@ public class CyrNameResult {
 	    		&& this.patronumic.equals(rst.getPatronumic());
 	}
 	/**
-	 * Возвращает значение из поля {@link CyrNameResult#name}
-	 * @return имя
+	 * {@link CyrNameResult#name}
+	 * @return пїЅпїЅпїЅ
 	 */
 	public String getName() {
 		return this.name;
 	}
 	/**
-	 * Возвращает значение из поля {@link CyrNameResult#surname}
-	 * @return фамилия
+	 * {@link CyrNameResult#surname}
+	 * @return пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	 */
 	public String getSurname() {
 		return this.surname;
 	}
 	/**
-	 * Возвращает значение из поля {@link CyrNameResult#patronumic}
-	 * @return отчество
+	 *  {@link CyrNameResult#patronumic}
+	 * @return пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	 */
 	public String getPatronumic() {
 		return this.patronumic;

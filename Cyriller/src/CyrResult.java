@@ -2,17 +2,17 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 public class CyrResult {
-	/**Именительный*/
+	/**РРјРµРЅРёС‚РµР»СЊРЅС‹Р№*/
 	protected String nominative;
-	/**Родительный*/
+	/**Р РѕРґРёС‚РµР»СЊРЅС‹Р№*/
 	protected String genitive;
-	/**Дательный*/
+	/**Р”Р°С‚РµР»СЊРЅС‹Р№*/
 	protected String dative;
-	/**Винительный*/
+	/**Р’РёРЅРёС‚РµР»СЊРЅС‹Р№*/
 	protected String accusative;
-	/**Творительный*/
+	/**РўРІРѕСЂРёС‚РµР»СЊРЅС‹Р№*/
 	protected String instrumental;
-	/**Предложный*/
+	/**РџСЂРµРґР»РѕР¶РЅС‹Р№*/
 	protected String prepositional;
 
 	public CyrResult() {
@@ -59,41 +59,42 @@ public class CyrResult {
 	}
 	
 	/**
-	 * Именительный, Кто? Что? (есть)
+	 * РРјРµРЅРёС‚РµР»СЊРЅС‹Р№, РљС‚Рѕ? Р§С‚Рѕ? (РµСЃС‚СЊ)
 	 * @return @see {@link CyrResult#nominative}
 	 */
 	public String getNominative() {
 		return this.nominative;
 	}
 	/**
-	 * Родительный, Кого? Чего? (нет)
+	 * Р РѕРґРёС‚РµР»СЊРЅС‹Р№, РљРѕРіРѕ? Р§РµРіРѕ? (РЅРµС‚)
 	 * @return @see {@link CyrResult#genitive}
 	 */
 	public String getGenitive(){
 		return this.genitive;
 	}
 	/**
-	 *  Дательный, Кому? Чему? (дам)
+	 * Р”Р°С‚РµР»СЊРЅС‹Р№, РљРѕРјСѓ? Р§РµРјСѓ? (РґР°Рј)
 	 * @return @see {@link CyrResult#dative}
 	 */
 	public String getDative(){
 		return this.dative;
 	}
 	/**
-	 * Винительный, Кого? Что? (вижу)
+	 * Р’РёРЅРёС‚РµР»СЊРЅС‹Р№, РљРѕРіРѕ? Р§С‚Рѕ? (РІРёР¶Сѓ)
 	 * @return @see {@link CyrResult#accusative}
 	 */
 	public String getAccusative(){
 		return this.accusative;
 	}
 	/**
-	 * Творительный, Кем? Чем? (горжусь)
+	 * РўРІРѕСЂРёС‚РµР»СЊРЅС‹Р№, РљРµРј? Р§РµРј? (РіРѕСЂР¶СѓСЃСЊ)
 	 * @return @see {@link CyrResult#instrumental}
 	 */
 	public String getInstrumental(){
 		return this.instrumental;
 	}
-	/**Предложный, О ком? О чем? (думаю)
+	/**
+	 * РџСЂРµРґР»РѕР¶РЅС‹Р№, Рћ РєРѕРј? Рћ С‡РµРј? (РґСѓРјР°СЋ)
 	 * @return @see {@link CyrResult#prepositional}
 	 */
 	public String getPrepositional(){

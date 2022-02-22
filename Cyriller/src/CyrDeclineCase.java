@@ -59,74 +59,74 @@ public class CyrDeclineCase {
 	}
 	
 	/**
-	 * Именительный (Nominative), Кто? Что? (есть).
-	 * @return экземпляр класса Именительный падеж
+	 * РРјРµРЅРёС‚РµР»СЊРЅС‹Р№ (Nominative), РљС‚Рѕ? Р§С‚Рѕ? (РµСЃС‚СЊ).
+	 * @return
 	 */
 	public static CyrDeclineCase Nominative() {
 		return new CyrDeclineCase(
-				"Именительный",
+				"РРјРµРЅРёС‚РµР»СЊРЅС‹Р№",
 				"Nominative",
-				"Кто? Что? (есть)",
+				"РљС‚Рѕ? Р§С‚Рѕ? (РµСЃС‚СЊ)",
 				1,
 				CasesEnum.Nominative);
 	}
 	/**
-	 * Родительный (Genitive), Кого? Чего? (нет).
-	 * @return экземпляр класса Родительный падеж
+	 * Р РѕРґРёС‚РµР»СЊРЅС‹Р№ (Genitive), РљРѕРіРѕ? Р§РµРіРѕ? (РЅРµС‚).
+	 * @return  
 	 */
 	public static CyrDeclineCase Genitive() {
 		return new CyrDeclineCase(
-				"Родительный",
+				"Р РѕРґРёС‚РµР»СЊРЅС‹Р№",
 				"Genitive",
-				"Кого? Чего? (нет)",
+				"РљРѕРіРѕ? Р§РµРіРѕ? (РЅРµС‚)",
 				2,
 				CasesEnum.Genitive);
 	}
 	/**
-	 * Дательный (Dative), Кому? Чему? (дам).
-	 * @return экземпляр класса Дательный падеж
+	 * Р”Р°С‚РµР»СЊРЅС‹Р№ (Dative), РљРѕРјСѓ? Р§РµРјСѓ? (РґР°Рј).
+	 * @return  
 	 */
 	public static CyrDeclineCase Dative() {
 		return new CyrDeclineCase(
-				"Дательный",
+				"Р”Р°С‚РµР»СЊРЅС‹Р№",
 				"Dative",
-				"Кому? Чему? (дам)",
+				"РљРѕРјСѓ? Р§РµРјСѓ? (РґР°Рј)",
 				3,
 				CasesEnum.Dative);
 	}
 	/**
-	 * Винительный (Accusative), Кого? Что? (вижу).
-	 * @return экземпляр класса Винительный падеж
+	 * Р’РёРЅРёС‚РµР»СЊРЅС‹Р№ (Accusative), РљРѕРіРѕ? Р§С‚Рѕ? (РІРёР¶Сѓ).
+	 * @return  
 	 */
 	public static CyrDeclineCase Accusative() {
 		return new CyrDeclineCase(
-				"Винительный",
+				"Р’РёРЅРёС‚РµР»СЊРЅС‹Р№",
 				"Accusative",
-				"Кого? Что? (вижу)",
+				"РљРѕРіРѕ? Р§С‚Рѕ? (РІРёР¶Сѓ)",
 				4,
 				CasesEnum.Accusative);
 	}
 	/**
-	 * Творительный (Instrumental), Кем? Чем? (горжусь).
-	 * @return экземпляр класса Творительный падеж
+	 * РўРІРѕСЂРёС‚РµР»СЊРЅС‹Р№ (Instrumental), РљРµРј? Р§РµРј? (РіРѕСЂР¶СѓСЃСЊ).
+	 * @return 
 	 */
 	public static CyrDeclineCase Instrumental() {
 		return new CyrDeclineCase(
-				"Творительный",
+				"РўРІРѕСЂРёС‚РµР»СЊРЅС‹Р№",
 				"Instrumental",
-				"Кем? Чем? (горжусь)",
+				"РљРµРј? Р§РµРј? (РіРѕСЂР¶СѓСЃСЊ)",
 				5,
 				CasesEnum.Instrumental);
 	}
 	/**
-	 * Предложный (Prepositional), О ком? О чем? (думаю).
-	 * @return экземпляр класса Предложный падеж
+	 * РџСЂРµРґР»РѕР¶РЅС‹Р№ (Prepositional), Рћ РєРѕРј? Рћ С‡РµРј? (РґСѓРјР°СЋ).
+	 * @return  
 	 */
 	public static CyrDeclineCase Prepositional() {
 		return new CyrDeclineCase(
-				"Предложный",
+				"РџСЂРµРґР»РѕР¶РЅС‹Р№",
 				"Prepositional",
-				"О ком? О чем? (думаю)",
+				"Рћ РєРѕРј? Рћ С‡РµРј? (РґСѓРјР°СЋ)",
 				6,
 				CasesEnum.Prepositional);
 	}
