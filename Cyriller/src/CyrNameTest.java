@@ -17,6 +17,7 @@ class CyrNameTest {
 	@Test
 	void testDeclineStringCasesEnumGendersEnumBoolean() {
 		fail("Not yet implemented");
+		///lkjh
 	}
 
 	@Test
