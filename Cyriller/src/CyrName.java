@@ -26,12 +26,12 @@ public class CyrName {
 		return result;
 	}
 	/**
-	 * �������� ������ ��� � ��������� �����.
-	 * @param fullName ������ ���, � ������������ ������.
-	 * @param cases �����, � ������� ����� �����������.
-	 * @param gender ���, ���������� �����
-	 * @param shorten ��������� �� ��� � �������� � ���������� ���������. � �������, ������ ���� ��������, ����� ������ �. �.
-	 * @return ���������� ��������� ���������
+	 * Склоняет полное имя в указанный падеж.
+	 * @param fullName Полное имя, в именительном падеже.
+	 * @param cases Падеж, в который нужно просклонять.
+	 * @param gender Пол, указанного имени
+	 * @param shorten Сократить ли имя и отчество в результате склонения. К примеру, Иванов Иван Иванович, будет Иванов И. И.
+	 * @return Возвращает результат склонения в виде
 	 */
 	public CyrNameResult Decline(String fullName, CasesEnum cases, GendersEnum gender, boolean shorten) {
 		String[] values = this.Decline(fullName, cases.getValue(), gender.getValue(), shorten);
@@ -231,11 +231,11 @@ public class CyrName {
         return Decline(surname, name, patronymic, cases, gender, shorten);
 	}
 	/**
-	 * �����������, ����? ����? (���)
-	 * @param name ���, ��� ���������
-	 * @param isFeminine True, ��� ������� ����.
-	 * @param shorten ��������� �� ���, � �������, ���� ����� �.
-	 * @return ���������� ��������� ���������.
+	 * Родительный, Кого? Чего? (нет)
+	 * @param name Имя, для склонения.
+	 * @param isFeminine True, для женских имен.
+	 * @param shorten Сократить ли имя, к примеру, Иван будет И.
+	 * @return Возвращает результат склонения.
 	 */
     public String DeclineNameGenitive(String name, boolean isFeminine, boolean shorten) {
         String temp;
@@ -251,57 +251,57 @@ public class CyrName {
             temp = name;
 
             switch (SubstringRight(name, 3).toLowerCase()) {
-                case "���":
-                    name = SetEnd(name, 2, "���");
+                case "лев":
+                    name = SetEnd(name, 2, "ьва");
                     break;
             }
 
             if (name == temp) {
                 switch (SubstringRight(name, 2)) {
-                    case "��":
-                    case "��":
-                    case "��":
-                        name = SetEnd(name, "�");
+                    case "ей":
+                    case "ий":
+                    case "ай":
+                        name = SetEnd(name, "я");
                         break;
-                    case "��":
-                        name = SetEnd(name, "��");
+                    case "ел":
+                        name = SetEnd(name, "ла");
                         break;
-                    case "��":
-                        name = SetEnd(name, "��");
+                    case "ец":
+                        name = SetEnd(name, "ца");
                         break;
-                    case "��":
-                    case "��":
-                    case "��":
-                    case "��":
-                    case "��":
-                    case "��":
-                        name = SetEnd(name, "�");
+                    case "га":
+                    case "жа":
+                    case "ка":
+                    case "ха":
+                    case "ча":
+                    case "ща":
+                        name = SetEnd(name, "й");
                         break;
                 }
             }
 
             if (name == temp) {
                 switch (SubstringRight(name, 1)) {
-                    case "�":
-                        name = SetEnd(name, "�");
+                    case "а":
+                        name = SetEnd(name, "ы");
                         break;
-                    case "�":
-                    case "�":
-                    case "�":
-                    case "�":
-                    case "�":
-                    case "�":
-                    case "�":
+                    case "е":
+                    case "ё":
+                    case "и":
+                    case "о":
+                    case "у":
+                    case "э":
+                    case "ю":
                         break;
-                    case "�":
-                        name = SetEnd(name, "�");
+                    case "я":
+                        name = SetEnd(name, "и");
                         break;
-                    case "�":
-                        name = SetEnd(name, (isFeminine ? "�" : "�"));
+                    case "ь":
+                        name = SetEnd(name, (isFeminine ? "и" : "я"));
                         break;
                     default:
                         if (!isFeminine)
-                            name = name + "�";
+                            name += "а";
                         break;
                 }
             }
@@ -311,11 +311,11 @@ public class CyrName {
         return name;
     }
     /**
-     * ���������, ����? ����? (���)
-     * @param name ���, ��� ���������.
-     * @param isFeminine True, ��� ������� ����.
-     * @param shorten ��������� �� ���, � �������, ���� ����� �.
-     * @return ���������� ��������� ���������.
+     * Дательный, Кому? Чему? (дам)
+     * @param name Имя, для склонения.
+     * @param isFeminine True, для женских имен.
+     * @param shorten Сократить ли имя, к примеру, Иван будет И.
+     * @return Возвращает результат склонения.
      */
     public String DeclineNameDative(String name, boolean isFeminine, boolean shorten) {
         String temp;
@@ -331,50 +331,50 @@ public class CyrName {
             temp = name;
 
             switch (SubstringRight(name, 3).toLowerCase()) {
-                case "���":
-                    name = SetEnd(name, 2, "���");
+                case "лев":
+                    name = SetEnd(name, 2, "ьву");
                     break;
             }
 
             if (name == temp) {
                 switch (SubstringRight(name, 2)) {
-                    case "��":
-                    case "��":
-                    case "��":
-                        name = SetEnd(name, "�");
+                    case "ей":
+                    case "ий":
+                    case "ай":
+                        name = SetEnd(name, "ю");
                         break;
-                    case "��":
-                        name = SetEnd(name, "��");
+                    case "ел":
+                        name = SetEnd(name, "лу");
                         break;
-                    case "��":
-                        name = SetEnd(name, "��");
+                    case "ец":
+                        name = SetEnd(name, "цу");
                         break;
-                    case "��":
-                        name = SetEnd(name, "��");
+                    case "ия":
+                        name = SetEnd(name, "ии");
                         break;
                 }
             }
 
             if (name == temp) {
                 switch (SubstringRight(name, 1)) {
-                    case "�":
-                    case "�":
-                        name = SetEnd(name, "�");
+                    case "а":
+                    case "я":
+                        name = SetEnd(name, "е");
                         break;
-                    case "�":
-                    case "�":
-                    case "�":
-                    case "�":
-                    case "�":
-                    case "�":
-                    case "�":
+                    case "е":
+                    case "ё":
+                    case "и":
+                    case "о":
+                    case "у":
+                    case "э":
+                    case "ю":
                         break;
-                    case "�":
-                        name = SetEnd(name, (isFeminine ? "�" : "�"));
+                    case "ь":
+                        name = SetEnd(name, (isFeminine ? "и" : "ю"));
                         break;
                     default:
                         if (!isFeminine) {
-                            name = name + "�";
+                            name += "у";
                         }
                         break;
                 }
@@ -384,11 +384,11 @@ public class CyrName {
         return name;
     }
     /**
-     * �����������, ����? ���? (����)
-     * @param name ���, ��� ���������.
-     * @param isFeminine True, ��� ������� ����.
-     * @param shorten ��������� �� ���, � �������, ���� ����� �.
-     * @return ���������� ��������� ���������.
+     * Винительный, Кого? Что? (вижу)
+     * @param name Имя, для склонения.
+     * @param isFeminine True, для женских имен.
+     * @param shorten Сократить ли имя, к примеру, Иван будет И.
+     * @return Возвращает результат склонения.
      */
     public String DeclineNameAccusative(String name, boolean isFeminine, boolean shorten) {
         String temp;
@@ -404,51 +404,51 @@ public class CyrName {
             temp = name;
 
             switch (SubstringRight(name, 3).toLowerCase()) {
-                case "���":
-                    name = SetEnd(name, 2, "���");
+                case "лев":
+                    name = SetEnd(name, 2, "ьва");
                     break;
             }
 
             if (name == temp) {
                 switch (SubstringRight(name, 2)) {
-                    case "��":
-                    case "��":
-                    case "��":
-                        name = SetEnd(name, "�");
+                    case "ей":
+                    case "ий":
+                    case "ай":
+                        name = SetEnd(name, "я");
                         break;
-                    case "��":
-                        name = SetEnd(name, "��");
+                    case "ел":
+                        name = SetEnd(name, "ла");
                         break;
-                    case "��":
-                        name = SetEnd(name, "��");
+                    case "ец":
+                        name = SetEnd(name, "ца");
                         break;
                 }
             }
 
             if (name == temp) {
                 switch (SubstringRight(name, 1)) {
-                    case "�":
-                        name = SetEnd(name, "�");
+                    case "а":
+                        name = SetEnd(name, "у");
                         break;
-                    case "�":
-                    case "�":
-                    case "�":
-                    case "�":
-                    case "�":
-                    case "�":
-                    case "�":
+                    case "е":
+                    case "ё":
+                    case "и":
+                    case "о":
+                    case "у":
+                    case "э":
+                    case "ю":
                         break;
-                    case "�":
-                        name = SetEnd(name, "�");
+                    case "я":
+                        name = SetEnd(name, "ю");
                         break;
-                    case "�":
+                    case "ь":
                         if (!isFeminine) {
-                            name = SetEnd(name, "�");
+                            name = SetEnd(name, "я");
                         }
                         break;
                     default:
                         if (!isFeminine)
-                            name = name + "�";
+                            name += "а";
                         break;
                 }
             }
@@ -457,11 +457,11 @@ public class CyrName {
         return name;
     }
     /**
-     * ������������, ���? ���? (�������)
-     * @param name ���, ��� ���������.
-     * @param isFeminine True, ��� ������� ����.
-     * @param shorten ��������� �� ���, � �������, ���� ����� �.
-     * @return ���������� ��������� ���������.
+     * Творительный, Кем? Чем? (горжусь)
+     * @param name Имя, для склонения.
+     * @param isFeminine True, для женских имен.
+     * @param shorten Сократить ли имя, к примеру, Иван будет И.
+     * @return Возвращает результат склонения.
      */
     public String DeclineNameInstrumental(String name, boolean isFeminine, boolean shorten) {
         String temp;
@@ -477,56 +477,56 @@ public class CyrName {
             temp = name;
 
             switch (SubstringRight(name, 3).toLowerCase()) {
-                case "���":
-                    name = SetEnd(name, 2, "����");
+                case "лев":
+                    name = SetEnd(name, 2, "ьвом");
                     break;
             }
 
             if (name == temp) {
                 switch (SubstringRight(name, 2)) {
-                    case "��":
-                    case "��":
-                    case "��":
-                        name = SetEnd(name, 1, "��");
+                    case "ей":
+                    case "ий":
+                    case "ай":
+                        name = SetEnd(name, 1, "ем");
                         break;
-                    case "��":
-                        name = SetEnd(name, 2, "���");
+                    case "ел":
+                        name = SetEnd(name, 2, "лом");
                         break;
-                    case "��":
-                        name = SetEnd(name, 2, "���");
+                    case "ец":
+                        name = SetEnd(name, 2, "цом");
                         break;
-                    case "��":
-                    case "��":
-                    case "��":
-                    case "��":
-                    case "��":
-                        name = SetEnd(name, 1, "��");
+                    case "жа":
+                    case "ца":
+                    case "ча":
+                    case "ша":
+                    case "ща":
+                        name = SetEnd(name, 1, "ей");
                         break;
                 }
             }
 
             if (name == temp) {
                 switch (SubstringRight(name, 1)) {
-                    case "�":
-                        name = SetEnd(name, 1, "��");
+                    case "а":
+                        name = SetEnd(name, 1, "ой");
                         break;
-                    case "�":
-                    case "�":
-                    case "�":
-                    case "�":
-                    case "�":
-                    case "�":
-                    case "�":
+                    case "е":
+                    case "ё":
+                    case "и":
+                    case "о":
+                    case "у":
+                    case "э":
+                    case "ю":
                         break;
-                    case "�":
-                        name = SetEnd(name, 1, "��");
+                    case "я":
+                        name = SetEnd(name, 1, "ей");
                         break;
-                    case "�":
-                        name = SetEnd(name, 1, (isFeminine ? "��" : "��"));
+                    case "ь":
+                        name = SetEnd(name, 1, (isFeminine ? "ью" : "ем"));
                         break;
                     default:
                         if (!isFeminine) {
-                            name = name + "��";
+                            name += "ом";
                         }
                         break;
                 }
@@ -536,11 +536,11 @@ public class CyrName {
         return name;
     }
     /**
-     * ����������, � ���? � ���? (�����)
-     * @param name ���, ��� ���������.
-     * @param isFeminine True, ��� ������� ����.
-     * @param shorten ��������� �� ���, � �������, ���� ����� �.
-     * @return ���������� ��������� ���������.
+     * Предложный, О ком? О чем? (думаю)
+     * @param name Имя, для склонения.
+     * @param isFeminine True, для женских имен.
+     * @param shorten Сократить ли имя, к примеру, Иван будет И.
+     * @return Возвращает результат склонения.
      */
     public String DeclineNamePrepositional(String name, boolean isFeminine, boolean shorten) {
         String temp;
@@ -556,52 +556,52 @@ public class CyrName {
             temp = name;
 
             switch (SubstringRight(name, 3).toLowerCase()) {
-                case "���":
-                    name = SetEnd(name, 2, "���");
+                case "лев":
+                    name = SetEnd(name, 2, "ьве");
                     break;
             }
 
             if (name == temp) {
                 switch (SubstringRight(name, 2)) {
-                    case "��":
-                    case "��":
-                        name = SetEnd(name, "�");
+                    case "ей":
+                    case "ай":
+                        name = SetEnd(name, "е");
                         break;
-                    case "��":
-                        name = SetEnd(name, "�");
+                    case "ий":
+                        name = SetEnd(name, "и");
                         break;
-                    case "��":
-                        name = SetEnd(name, "��");
+                    case "ел":
+                        name = SetEnd(name, "ле");
                         break;
-                    case "��":
-                        name = SetEnd(name, "��");
+                    case "ец":
+                        name = SetEnd(name, "це");
                         break;
-                    case "��":
-                        name = SetEnd(name, "��");
+                    case "ия":
+                        name = SetEnd(name, "ии");
                         break;
                 }
             }
 
             if (name == temp) {
                 switch (SubstringRight(name, 1)) {
-                    case "�":
-                    case "�":
-                        name = SetEnd(name, "�");
+                    case "а":
+                    case "я":
+                        name = SetEnd(name, "е");
                         break;
-                    case "�":
-                    case "�":
-                    case "�":
-                    case "�":
-                    case "�":
-                    case "�":
-                    case "�":
+                    case "е":
+                    case "ё":
+                    case "и":
+                    case "о":
+                    case "у":
+                    case "э":
+                    case "ю":
                         break;
-                    case "�":
-                        name = SetEnd(name, (isFeminine ? "�" : "�"));
+                    case "ь":
+                        name = SetEnd(name, (isFeminine ? "и" : "е"));
                         break;
                     default:
                         if (!isFeminine) {
-                            name = name + "�";
+                            name += "е";
                         }
                         break;
                 }
@@ -611,11 +611,11 @@ public class CyrName {
         return name;
     }
     /**
-     * �����������, ����? ����? (���)
-     * @param patronymic ��������, ��� ���������.
-     * @param isFeminine True, ��� ������� �������.
-     * @param shorten ��������� �� ��������, � �������, �������� ����� �.
-     * @return ���������� ��������� ���������.
+     * Родительный, Кого? Чего? (нет)
+     * @param patronymic Отчество, для склонения.
+     * @param isFeminine True, для женских отчеств.
+     * @param shorten Сократить ли отчество, к примеру, Иванович будет И.
+     * @return Возвращает результат склонения.
      */
     public String DeclinePatronymicGenitive(String patronymic, boolean isFeminine, boolean shorten) {
         if (this.IsShorten(patronymic)) {
@@ -627,26 +627,26 @@ public class CyrName {
         }
         else {
             switch (SubstringRight(patronymic, 1)) {
-                case "�":
-                    patronymic = SetEnd(patronymic, "�");
+                case "а":
+                    patronymic = SetEnd(patronymic, "ы");
                     break;
-                case "�":
-                case "�":
-                case "�":
-                case "�":
-                case "�":
-                case "�":
-                case "�":
+                case "е":
+                case "ё":
+                case "и":
+                case "о":
+                case "у":
+                case "э":
+                case "ю":
                     break;
-                case "�":
-                    patronymic = SetEnd(patronymic, "�");
+                case "я":
+                    patronymic = SetEnd(patronymic, "и");
                     break;
-                case "�":
-                    patronymic = SetEnd(patronymic, (isFeminine ? "�" : "�"));
+                case "ь":
+                    patronymic = SetEnd(patronymic, (isFeminine ? "и" : "я"));
                     break;
                 default:
                     if (!isFeminine) {
-                        patronymic = patronymic + "�";
+                        patronymic += "а";
                     }
                     break;
             }
@@ -655,11 +655,11 @@ public class CyrName {
         return patronymic;
     }
     /**
-     * ���������, ����? ����? (���)
-     * @param patronymic ��������, ��� ���������.
-     * @param isFeminine True, ��� ������� �������.
-     * @param shorten ��������� �� ��������, � �������, �������� ����� �.
-     * @return ���������� ��������� ���������.
+     * Дательный, Кому? Чему? (дам)
+     * @param patronymic Отчество, для склонения.
+     * @param isFeminine True, для женских отчеств.
+     * @param shorten Сократить ли отчество, к примеру, Иванович будет И.
+     * @return Возвращает результат склонения.
      */
     public String DeclinePatronymicDative(String patronymic, boolean isFeminine, boolean shorten) {
         if (this.IsShorten(patronymic)) {
@@ -671,24 +671,24 @@ public class CyrName {
         }
         else {
             switch (SubstringRight(patronymic, 1)) {
-                case "�":
-                case "�":
-                    patronymic = SetEnd(patronymic, "�");
+                case "а":
+                case "я":
+                    patronymic = SetEnd(patronymic, "е");
                     break;
-                case "�":
-                case "�":
-                case "�":
-                case "�":
-                case "�":
-                case "�":
-                case "�":
+                case "е":
+                case "ё":
+                case "и":
+                case "о":
+                case "у":
+                case "э":
+                case "ю":
                     break;
-                case "�":
-                    patronymic = SetEnd(patronymic, (isFeminine ? "�" : "�"));
+                case "ь":
+                    patronymic = SetEnd(patronymic, (isFeminine ? "и" : "ю"));
                     break;
                 default:
                     if (!isFeminine) {
-                        patronymic = patronymic + "�";
+                        patronymic += "у";
                     }
                     break;
             }
@@ -697,11 +697,11 @@ public class CyrName {
         return patronymic;
     }
     /**
-     * �����������, ����? ���? (����)
-     * @param patronymic ��������, ��� ���������.
-     * @param isFeminine True, ��� ������� �������.
-     * @param shorten ��������� �� ��������, � �������, �������� ����� �.
-     * @return ���������� ��������� ���������.
+     * Винительный, Кого? Что? (вижу)
+     * @param patronymic Отчество, для склонения.
+     * @param isFeminine True, для женских отчеств.
+     * @param shorten Сократить ли отчество, к примеру, Иванович будет И.
+     * @return Возвращает результат склонения.
      */
     public String DeclinePatronymicAccusative(String patronymic, boolean isFeminine, boolean shorten) {
         if (this.IsShorten(patronymic)) {
@@ -713,27 +713,27 @@ public class CyrName {
         }
         else {
             switch (SubstringRight(patronymic, 1)) {
-                case "�":
-                    patronymic = SetEnd(patronymic, "�");
+                case "а":
+                    patronymic = SetEnd(patronymic, "у");
                     break;
-                case "�":
-                case "�":
-                case "�":
-                case "�":
-                case "�":
-                case "�":
-                case "�":
+                case "е":
+                case "ё":
+                case "и":
+                case "о":
+                case "у":
+                case "э":
+                case "ю":
                     break;
-                case "�":
-                    patronymic = SetEnd(patronymic, "�");
+                case "я":
+                    patronymic = SetEnd(patronymic, "ю");
                     break;
-                case "�":
+                case "ь":
                     if (!isFeminine)
-                        patronymic = SetEnd(patronymic, "�");
+                        patronymic = SetEnd(patronymic, "я");
                     break;
                 default:
                     if (!isFeminine)
-                        patronymic = patronymic + "�";
+                        patronymic += "а";
                     break;
             }
         }
@@ -741,11 +741,11 @@ public class CyrName {
         return patronymic;
     }
     /**
-     * ������������, ���? ���? (�������)
-     * @param patronymic ��������, ��� ���������.
-     * @param isFeminine True, ��� ������� �������.
-     * @param shorten ��������� �� ��������, � �������, �������� ����� �.
-     * @return ���������� ��������� ���������.
+     *  Творительный, Кем? Чем? (горжусь)
+     * @param patronymic Отчество, для склонения.
+     * @param isFeminine True, для женских отчеств.
+     * @param shorten Сократить ли отчество, к примеру, Иванович будет И.
+     * @return Возвращает результат склонения.
      */
     public String DeclinePatronymicInstrumental(String patronymic, boolean isFeminine, boolean shorten) {
         String temp;
@@ -761,36 +761,36 @@ public class CyrName {
             temp = patronymic;
 
             switch (SubstringRight(patronymic, 2)) {
-                case "��":
-                    patronymic = patronymic + (patronymic.toLowerCase() == "�����" ? "��" : "��");
+                case "ич":
+                    patronymic = patronymic + (patronymic.toLowerCase() == "ильич" ? "ом" : "ем");
                     break;
-                case "��":
-                    patronymic = SetEnd(patronymic, 2, "���");
+                case "на":
+                    patronymic = SetEnd(patronymic, 2, "ной");
                     break;
             }
 
             if (patronymic == temp) {
                 switch (SubstringRight(patronymic, 1)) {
-                    case "�":
-                        patronymic = SetEnd(patronymic, 1, "��");
+                    case "а":
+                        patronymic = SetEnd(patronymic, 1, "ой");
                         break;
-                    case "�":
-                    case "�":
-                    case "�":
-                    case "�":
-                    case "�":
-                    case "�":
-                    case "�":
+                    case "е":
+                    case "ё":
+                    case "и":
+                    case "о":
+                    case "у":
+                    case "э":
+                    case "ю":
                         break;
-                    case "�":
-                        patronymic = SetEnd(patronymic, 1, "��");
+                    case "я":
+                        patronymic = SetEnd(patronymic, 1, "ей");
                         break;
-                    case "�":
-                        patronymic = SetEnd(patronymic, 1, (isFeminine ? "��" : "��"));
+                    case "ь":
+                        patronymic = SetEnd(patronymic, 1, (isFeminine ? "ью" : "ем"));
                         break;
                     default:
                         if (!isFeminine) {
-                            patronymic = patronymic + "��";
+                            patronymic += "ом";
                         }
                         break;
                 }
@@ -800,11 +800,11 @@ public class CyrName {
         return patronymic;
     }
     /**
-     * ������������, ���? ���? (�������)
-     * @param patronymic ��������, ��� ���������.
-     * @param isFeminine True, ��� ������� �������.
-     * @param shorten ��������� �� ��������, � �������, �������� ����� �.
-     * @return ���������� ��������� ���������.
+     * Творительный, Кем? Чем? (горжусь)
+     * @param patronymic Отчество, для склонения.
+     * @param isFeminine True, для женских отчеств.
+     * @param shorten Сократить ли отчество, к примеру, Иванович будет И.
+     * @return Возвращает результат склонения.
      */
     public String DeclinePatronymicPrepositional(String patronymic, boolean isFeminine, boolean shorten) {
         if (this.IsShorten(patronymic)) {
@@ -816,24 +816,24 @@ public class CyrName {
         }
         else {
             switch (SubstringRight(patronymic, 1)) {
-                case "�":
-                case "�":
-                    patronymic = SetEnd(patronymic, "�");
+                case "а":
+                case "я":
+                    patronymic = SetEnd(patronymic, "е");
                     break;
-                case "�":
-                case "�":
-                case "�":
-                case "�":
-                case "�":
-                case "�":
-                case "�":
+                case "е":
+                case "ё":
+                case "и":
+                case "о":
+                case "у":
+                case "э":
+                case "ю":
                     break;
-                case "�":
-                    patronymic = SetEnd(patronymic, (isFeminine ? "�" : "�"));
+                case "ь":
+                    patronymic = SetEnd(patronymic, (isFeminine ? "и" : "е"));
                     break;
                 default:
                     if (!isFeminine) {
-                        patronymic = patronymic + "�";
+                        patronymic += "е";
                     }
                     break;
             }
@@ -842,14 +842,19 @@ public class CyrName {
         return patronymic;
     }
 	/**
-	 * �������� ������� � ��������� �����.
-	 * @param surname �������, � ������������ ������.
-	 * @param cases �����, � ������� ����� ����������� �������, ��� 1 � ������������, 2 � �����������, 3 � ���������, 4 � �����������, 5 � ������������, 6 � ����������.
-	 * @param isFeminine True, ��� ������� �������.
-	 * @return ���������� ��������� ���������.
+	 * Склоняет фамилию в указанный падеж.
+	 * @param surname Фамилия, в именительном падеже.
+	 * @param cases Падеж, в который нужно просклонять фамилию, где 1 – именительный, 2 – родительный, 3 – дательный, 4 – винительный, 5 – творительный, 6 – предложный.
+	 * @param isFeminine True, для женских фамилий.
+	 * @return Возвращает результат склонения.
 	 */
 	public String DeclineSurname(String surname, int cases, boolean isFeminine) {
 		String result = surname;
+		
+		if (surname.length() <= 1 || cases < 2 || cases > 6) {
+            result = surname;
+            return result;
+        }
 		
 		switch (cases){
             case 2:
@@ -872,10 +877,10 @@ public class CyrName {
         return result;
 	}
 	/**
-	 * ����������, � ���? � ���? (�����)
-	 * @param surname �������, ��� ���������.
-	 * @param isFeminine True, ��� ������� �������.
-	 * @return ���������� ��������� ���������.
+	 * Предложный, О ком? О чем? (думаю)
+	 * @param surname Фамилия, для склонения.
+	 * @param isFeminine True, для женских фамилий.
+	 * @return Возвращает результат склонения.
 	 */
 	public String DeclineSurnamePrepositional(String surname, boolean isFeminine) {
         String temp = surname;
@@ -885,37 +890,37 @@ public class CyrName {
 
         if (!isFeminine) {
             switch (end) {
-                case "���":
-                case "���":
-                case "���":
-                case "���":
-                case "���":
-                case "���":
-                    surname = SetEnd(surname, "��");
+                case "жий":
+                case "ний":
+                case "ций":
+                case "чий":
+                case "ший":
+                case "щий":
+                    surname = SetEnd(surname, "ем");
                     break;
-                case "���":
-                    surname = SetEnd(surname, 2, "���");
+                case "лец":
+                    surname = SetEnd(surname, 2, "ьце");
                     break;
             }
         }
         else {
             switch (end) {
-                case "���":
-                case "���":
-                case "���":
-                case "���":
-                    surname = SetEnd(surname, 1, "��");
+                case "ова":
+                case "ева":
+                case "ина":
+                case "ына":
+                    surname = SetEnd(surname, 1, "ой");
                     break;
-                case "���":
-                case "���":
-                case "���":
-                case "���":
-                case "���":
-                    surname = SetEnd(surname, "��");
+                case "жая":
+                case "цая":
+                case "чая":
+                case "шая":
+                case "щая":
+                    surname = SetEnd(surname, "ей");
                     break;
-                case "���":
-                case "���":
-                    surname = SetEnd(surname, 1, "��");
+                case "ска":
+                case "цка":
+                    surname = SetEnd(surname, 1, "ой");
                     break;
             }
         }
@@ -927,8 +932,8 @@ public class CyrName {
         end = SubstringRight(surname, 2);
 
         switch (end) {
-            case "��":
-                surname = SetEnd(surname, "�");
+            case "ия":
+                surname = SetEnd(surname, "и");
                 break;
         }
 
@@ -938,40 +943,40 @@ public class CyrName {
 
         if (!isFeminine) {
             switch (end) {
-                case "��":
-                    surname = SetEnd(surname, "��");
+                case "ок":
+                    surname = SetEnd(surname, "ке");
                     break;
-                case "��":
-                case "��":
-                    surname = SetEnd(surname, 2, "���");
+                case "ёк":
+                case "ек":
+                    surname = SetEnd(surname, 2, "ьке");
                     break;
-                case "��":
-                    surname = SetEnd(surname, "��");
+                case "ец":
+                    surname = SetEnd(surname, "це");
                     break;
-                case "��":
-                case "��":
-                case "��":
+                case "ий":
+                case "ый":
+                case "ой":
                     if (surname.length() > 4) {
-                        surname = SetEnd(surname, "��");
+                        surname = SetEnd(surname, "ом");
                     }
                     break;
-                case "��":
-                    if (surname.toLowerCase() == "�������" || surname.toLowerCase() == "�������") {
-                        surname = SetEnd(surname, "��");
+                case "ей":
+                    if (surname.toLowerCase() == "соловей" || surname.toLowerCase() == "воробей") {
+                        surname = SetEnd(surname, "ье");
                     }
                     else {
-                        surname = SetEnd(surname, "��");
+                        surname = SetEnd(surname, "ее");
                     }
                     break;
             }
         }
         else {
             switch (end) {
-                case "��":
-                    surname = SetEnd(surname, "��");
+                case "ая":
+                    surname = SetEnd(surname, "ой");
                     break;
-                case "��":
-                    surname = SetEnd(surname, "��");
+                case "яя":
+                    surname = SetEnd(surname, "ей");
                     break;
             }
         }
@@ -984,81 +989,81 @@ public class CyrName {
 
         if (!isFeminine) {
             switch (end) {
-                case "�":
+                case "а":
                     switch (surname.substring(surname.length() - 2, 1)) {
-                        case "�":
-                        case "�":
-                        case "�":
-                        case "�":
-                        case "�":
-                        case "�":
-                        case "�":
-                        case "�":
-                        case "�":
-                        case "�":
+                        case "а":
+                        case "е":
+                        case "ё":
+                        case "и":
+                        case "о":
+                        case "у":
+                        case "э":
+                        case "ы":
+                        case "ю":
+                        case "я":
                             break;
                         default:
-                            surname = SetEnd(surname, "�");
+                            surname = SetEnd(surname, "е");
                             break;
                     }
                     break;
-                case "�":
-                    surname = SetEnd(surname, "�");
+                case "я":
+                    surname = SetEnd(surname, "е");
                     break;
-                case "�":
-                case "�":
-                case "�":
-                case "�":
-                case "�":
-                case "�":
-                case "�":
-                case "�":
-                case "�":
-                case "�":
-                case "�":
-                case "�":
-                case "�":
-                case "�":
-                case "�":
-                case "�":
-                case "�":
-                case "�":
-                case "�":
-                    surname = surname + "�";
+                case "б":
+                case "в":
+                case "г":
+                case "д":
+                case "ж":
+                case "з":
+                case "к":
+                case "л":
+                case "м":
+                case "н":
+                case "п":
+                case "р":
+                case "с":
+                case "т":
+                case "ф":
+                case "ц":
+                case "ч":
+                case "ш":
+                case "щ":
+                    surname = surname + "е";
                     break;
-                case "�":
-                    if (!surname.endsWith("��") && !surname.endsWith("��")) {
-                        surname = surname + "�";
+                case "х":
+                    if (!surname.endsWith("их") && !surname.endsWith("ых")) {
+                        surname += "е";
                     }
                     break;
-                case "�":
-                case "�":
-                    surname = SetEnd(surname, "�");
+                case "ь":
+                case "й":
+                    surname = SetEnd(surname, "е");
                     break;
             }
         }
         else {
             switch (end) {
-                case "�":
+                case "а":
                     switch (surname.substring(surname.length() - 2, 1)) {
-                        case "�":
-                        case "�":
-                        case "�":
-                        case "�":
-                        case "�":
-                        case "�":
-                        case "�":
-                        case "�":
-                        case "�":
-                        case "�":
+	                    case "а":
+	                    case "е":
+	                    case "ё":
+	                    case "и":
+	                    case "о":
+	                    case "у":
+	                    case "э":
+	                    case "ы":
+	                    case "ю":
+	                    case "я":
                             break;
                         default:
-                            surname = SetEnd(surname, "�");
+                            surname = SetEnd(surname, "е");
                             break;
                     }
                     break;
-                case "�":
-                    surname = SetEnd(surname, "�");
+                case "я":
+                    surname = SetEnd(surname, "е");
                     break;
             }
         }
@@ -1066,10 +1071,10 @@ public class CyrName {
         return surname;
     }
 	/**
-	 * ������������, ���? ���? (�������)
-	 * @param surname �������, ��� ���������.
-	 * @param isFeminine True, ��� ������� �������.
-	 * @return ���������� ��������� ���������.
+	 * Творительный, Кем? Чем? (горжусь)
+	 * @param surname Фамилия, для склонения.
+	 * @param isFeminine True, для женских фамилий.
+	 * @return Возвращает результат склонения.
 	 */
 	public String DeclineSurnameInstrumental(String surname, boolean isFeminine) {
 		String temp = surname;
@@ -1079,36 +1084,36 @@ public class CyrName {
 
         if (!isFeminine) {
             switch (end) {
-                case "���":
-                    surname = SetEnd(surname, 2, "����");
-                    break;
-                case "���":
-                    surname = SetEnd(surname, 2, "���");
-                    break;
-                case "���":
-                    surname = SetEnd(surname, "��");
-                    break;
+	            case "лец":
+	                surname = SetEnd(surname, 2, "ьцом");
+	                break;
+	            case "бец":
+	                surname = SetEnd(surname, 2, "цем");
+	                break;
+	            case "кой":
+	                surname = SetEnd(surname, "им");
+	                break;
             }
         }
         else {
             switch (end) {
-                case "���":
-                case "���":
-                case "���":
-                case "���":
-                case "���":
-                    surname = SetEnd(surname, "��");
-                    break;
-                case "���":
-                case "���":
-                    surname = SetEnd(surname, 1, "��");
-                    break;
-                case "���":
-                case "���":
-                case "���":
-                case "���":
-                    surname = SetEnd(surname, 1, "��");
-                    break;
+	            case "жая":
+	            case "цая":
+	            case "чая":
+	            case "шая":
+	            case "щая":
+	                surname = SetEnd(surname, "ей");
+	                break;
+	            case "ска":
+	            case "цка":
+	                surname = SetEnd(surname, 1, "ой");
+	                break;
+	            case "еца":
+	            case "ица":
+	            case "аца":
+	            case "ьца":
+	                surname = SetEnd(surname, 1, "ей");
+	                break;
             }
         }
 
@@ -1118,75 +1123,76 @@ public class CyrName {
 
         end = SubstringRight(surname, 2);
 
-        if (!isFeminine) {
+        if (!isFeminine)
+        {
             switch (end) {
-                case "��":
-                    surname = SetEnd(surname, 2, "���");
+                case "ок":
+                    surname = SetEnd(surname, 2, "ком");
                     break;
-                case "��":
-                case "��":
-                    surname = SetEnd(surname, 2, "����");
+                case "ёк":
+                case "ек":
+                    surname = SetEnd(surname, 2, "ьком");
                     break;
-                case "��":
-                    surname = SetEnd(surname, 2, "���");
+                case "ец":
+                    surname = SetEnd(surname, 2, "цом");
                     break;
-                case "��":
+                case "ий":
                     if (surname.length() > 4) {
-                        surname = SetEnd(surname, "��");
+                        surname = SetEnd(surname, "им");
                     }
                     break;
-                case "��":
-                case "��":
+                case "ый":
+                case "ой":
                     if (surname.length() > 4) {
-                        surname = SetEnd(surname, "��");
+                        surname = SetEnd(surname, "ым");
                     }
                     break;
-                case "��":
-                    if (surname.toLowerCase() == "�������" || surname.toLowerCase() == "�������") {
-                        surname = SetEnd(surname, 2, "���");
+                case "ей":
+                    if (surname.toLowerCase() == "соловей" || surname.toLowerCase() == "воробей") {
+                        surname = SetEnd(surname, 2, "ьем");
                     }
                     else {
-                        surname = SetEnd(surname, 2, "���");
+                        surname = SetEnd(surname, 2, "еем");
                     }
                     break;
-                case "��":
-                case "��":
-                case "��":
-                case "��":
-                case "��":
-                case "��":
-                case "��":
-                case "��":
-                    surname = surname + "��";
+                case "оч":
+                case "ич":
+                case "иц":
+                case "ьц":
+                case "ьш":
+                case "еш":
+                case "ыш":
+                case "яц":
+                    surname = surname + "ем";
                     break;
-                case "��":
-                case "��":
-                case "��":
-                case "��":
-                case "��":
-                case "��":
-                case "��":
-                case "��":
-                    if (surname.toLowerCase() != "������" && surname.toLowerCase() != "��������" && surname.toLowerCase() != "������" && surname.toLowerCase() != "����") {
-                        surname = surname + "��";
+                case "ин":
+                case "ын":
+                case "ен":
+                case "эн":
+                case "ов":
+                case "ев":
+                case "ёв":
+                case "ун":
+                    if (surname.toLowerCase() != "дарвин" && surname.toLowerCase() != "франклин" && surname.toLowerCase() != "чаплин" && surname.toLowerCase() != "грин") {
+                        surname = surname + "ым";
                     }
                     break;
-                case "��":
-                case "��":
-                case "��":
-                case "��":
-                case "��":
-                    surname = SetEnd(surname, 1, "��");
+                case "жа":
+                case "ца":
+                case "ча":
+                case "ша":
+                case "ща":
+                    surname = SetEnd(surname, 1, "ей");
                     break;
             }
         }
         else {
             switch (end) {
-                case "��":
-                    surname = SetEnd(surname, "��");
+                case "ая":
+                    surname = SetEnd(surname, "ой");
                     break;
-                case "��":
-                    surname = SetEnd(surname, "��");
+                case "яя":
+                    surname = SetEnd(surname, "ей");
                     break;
             }
         }
@@ -1199,83 +1205,83 @@ public class CyrName {
 
         if (!isFeminine) {
             switch (end) {
-                case "�":
+                case "а":
                     switch (surname.substring(surname.length() - 2, 1)) {
-                        case "�":
-                        case "�":
-                        case "�":
-                        case "�":
-                        case "�":
-                        case "�":
-                        case "�":
-                        case "�":
-                        case "�":
-                        case "�":
+                        case "а":
+                        case "е":
+                        case "ё":
+                        case "и":
+                        case "о":
+                        case "у":
+                        case "э":
+                        case "ы":
+                        case "ю":
+                        case "я":
                             break;
                         default:
-                            surname = SetEnd(surname, 1, "��");
+                            surname = SetEnd(surname, 1, "ой");
                             break;
                     }
                     break;
-                case "�":
-                    surname = SetEnd(surname, 1, "��");
+                case "я":
+                    surname = SetEnd(surname, 1, "ей");
                     break;
-                case "�":
-                case "�":
-                case "�":
-                case "�":
-                case "�":
-                case "�":
-                case "�":
-                case "�":
-                case "�":
-                case "�":
-                case "�":
-                case "�":
-                case "�":
-                case "�":
-                case "�":
-                case "�":
-                case "�":
-                case "�":
-                    surname = surname + "��";
+                case "б":
+                case "в":
+                case "г":
+                case "д":
+                case "ж":
+                case "з":
+                case "к":
+                case "л":
+                case "м":
+                case "н":
+                case "п":
+                case "р":
+                case "с":
+                case "т":
+                case "ф":
+                case "ц":
+                case "ч":
+                case "ш":
+                    surname = surname + "ом";
                     break;
-                case "�":
-                    if (!surname.endsWith("��") && !surname.endsWith("��")) {
-                        surname = surname + "��";
+                case "х":
+                    if (!surname.endsWith("их") && !surname.endsWith("ых")) {
+                        surname = surname + "ом";
                     }
                     break;
-                case "�":
-                    surname = surname + "��";
+                case "щ":
+                    surname += "ем";
                     break;
-                case "�":
-                case "�":
-                    surname = SetEnd(surname, 1, "��");
+                case "ь":
+                case "й":
+                    surname = SetEnd(surname, 1, "ем");
                     break;
             }
         }
         else {
             switch (end) {
-                case "�":
+                case "а":
                     switch (surname.substring(surname.length() - 2, 1)) {
-                        case "�":
-                        case "�":
-                        case "�":
-                        case "�":
-                        case "�":
-                        case "�":
-                        case "�":
-                        case "�":
-                        case "�":
-                        case "�":
+                        case "а":
+                        case "е":
+                        case "ё":
+                        case "и":
+                        case "о":
+                        case "у":
+                        case "э":
+                        case "ы":
+                        case "ю":
+                        case "я":
                             break;
                         default:
-                            surname = SetEnd(surname, 1, "��");
+                            surname = SetEnd(surname, 1, "ой");
                             break;
                     }
                     break;
-                case "�":
-                    surname = SetEnd(surname, 1, "��");
+                case "я":
+                    surname = SetEnd(surname, 1, "ей");
                     break;
             }
         }
