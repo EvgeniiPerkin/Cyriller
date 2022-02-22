@@ -1289,10 +1289,10 @@ public class CyrName {
         return surname;
 	}
 	/**
-	 * �����������, ����? ���? (����)
-	 * @param surname �������, ��� ���������.
-	 * @param isFeminine True, ��� ������� �������.
-	 * @return ���������� ��������� ���������.
+	 * Винительный, Кого? Что? (вижу)
+	 * @param surname Фамилия, для склонения.
+	 * @param isFeminine True, для женских фамилий.
+	 * @return Возвращает результат склонения.
 	 */
 	public String DeclineSurnameAccusative(String surname, boolean isFeminine) {
 		String temp = surname;
@@ -1302,30 +1302,30 @@ public class CyrName {
 
         if (!isFeminine) {
             switch (end) {
-                case "���":
-                case "���":
-                case "���":
-                case "���":
-                case "���":
-                case "���":
-                    surname = SetEnd(surname, 2, "���");
+	            case "жий":
+	            case "ний":
+	            case "ций":
+	            case "чий":
+	            case "ший":
+	            case "щий":
+                    surname = SetEnd(surname, 2, "его");
                     break;
-                case "���":
-                    surname = SetEnd(surname, 2, "���");
+                case "лец":
+                    surname = SetEnd(surname, 2, "ьца");
                     break;
             }
         }
         else {
             switch (end) {
-                case "���":
-                case "���":
-                case "���":
-                case "���":
-                    surname = SetEnd(surname, "�");
+	            case "ова":
+	            case "ева":
+	            case "ина":
+	            case "ына":
+                    surname = SetEnd(surname, "y");
                     break;
-                case "���":
-                case "���":
-                    surname = SetEnd(surname, 1, "��");
+                case "ска":
+                case "цка":
+                    surname = SetEnd(surname, 1, "ую");
                     break;
             }
         }
@@ -1338,40 +1338,40 @@ public class CyrName {
 
         if (!isFeminine) {
             switch (end) {
-                case "��":
-                    surname = SetEnd(surname, "��");
+                case "ок":
+                    surname = SetEnd(surname, "ка");
                     break;
-                case "��":
-                case "��":
-                    surname = SetEnd(surname, 2, "���");
+                case "ёк":
+                case "ек":
+                    surname = SetEnd(surname, 2, "ька");
                     break;
-                case "��":
-                    surname = SetEnd(surname, "��");
+                case "ец":
+                    surname = SetEnd(surname, "ца");
                     break;
-                case "��":
-                case "��":
-                case "��":
+                case "ий":
+                case "ый":
+                case "ой":
                     if (surname.length() > 4) {
-                        surname = SetEnd(surname, 2, "���");
+                        surname = SetEnd(surname, 2, "ого");
                     }
                     break;
-                case "��":
-                    if (surname.toLowerCase() == "�������" || surname.toLowerCase() == "�������") {
-                        surname = SetEnd(surname, "��");
+                case "ей":
+                    if (surname.toLowerCase() == "соловей" || surname.toLowerCase() == "воробей") {
+                        surname = SetEnd(surname, "ья");
                     }
                     else {
-                        surname = SetEnd(surname, "��");
+                        surname = SetEnd(surname, "ея");
                     }
                     break;
             }
         }
         else {
             switch (end) {
-                case "��":
-                    surname = SetEnd(surname, "��");
+                case "ая":
+                    surname = SetEnd(surname, "ую");
                     break;
-                case "��":
-                    surname = SetEnd(surname, "��");
+                case "яя":
+                    surname = SetEnd(surname, "юю");
                     break;
             }
         }
@@ -1384,81 +1384,81 @@ public class CyrName {
 
         if (!isFeminine) {
             switch (end) {
-                case "�":
+                case "а":
                     switch (surname.substring(surname.length() - 2, 1)) {
-                        case "�":
-                        case "�":
-                        case "�":
-                        case "�":
-                        case "�":
-                        case "�":
-                        case "�":
-                        case "�":
-                        case "�":
-                        case "�":
+	                    case "а":
+	                    case "е":
+	                    case "ё":
+	                    case "и":
+	                    case "о":
+	                    case "у":
+	                    case "э":
+	                    case "ы":
+	                    case "ю":
+	                    case "я":
                             break;
                         default:
-                            surname = SetEnd(surname, "�");
+                            surname = SetEnd(surname, "у");
                             break;
                     }
                     break;
-                case "�":
-                    surname = SetEnd(surname, "�");
+                case "я":
+                    surname = SetEnd(surname, "ю");
                     break;
-                case "�":
-                case "�":
-                case "�":
-                case "�":
-                case "�":
-                case "�":
-                case "�":
-                case "�":
-                case "�":
-                case "�":
-                case "�":
-                case "�":
-                case "�":
-                case "�":
-                case "�":
-                case "�":
-                case "�":
-                case "�":
-                case "�":
-                    surname = surname + "�";
-                    break;
-                case "�":
-                    if (!surname.endsWith("��") && !surname.endsWith("��")) {
-                        surname = surname + "�";
-                    }
-                    break;
-                case "�":
-                case "�":
-                    surname = SetEnd(surname, "�");
+	                case "б":
+	                case "в":
+	                case "г":
+	                case "д":
+	                case "ж":
+	                case "з":
+	                case "к":
+	                case "л":
+	                case "м":
+	                case "н":
+	                case "п":
+	                case "р":
+	                case "с":
+	                case "т":
+	                case "ф":
+	                case "ц":
+	                case "ч":
+	                case "ш":
+	                case "щ":
+	                    surname += "а";
+	                    break;
+	                case "х":
+	                    if (!surname.endsWith("их") && !surname.endsWith("ых")) {
+	                        surname += "а";
+	                    }
+	                    break;
+	                case "ь":
+	                case "й":
+                    surname = SetEnd(surname, "я");
                     break;
             }
         }
         else {
             switch (end) {
-                case "�":
+                case "а":
                     switch (surname.substring(surname.length() - 2, 1)) {
-                        case "�":
-                        case "�":
-                        case "�":
-                        case "�":
-                        case "�":
-                        case "�":
-                        case "�":
-                        case "�":
-                        case "�":
-                        case "�":
+	                    case "а":
+	                    case "е":
+	                    case "ё":
+	                    case "и":
+	                    case "о":
+	                    case "у":
+	                    case "э":
+	                    case "ы":
+	                    case "ю":
+	                    case "я":
                             break;
                         default:
-                            surname = SetEnd(surname, "�");
+                            surname = SetEnd(surname, "у");
                             break;
                     }
                     break;
-                case "�":
-                    surname = SetEnd(surname, "�");
+                case "я":
+                    surname = SetEnd(surname, "ю");
                     break;
             }
         }
