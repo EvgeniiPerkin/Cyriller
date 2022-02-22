@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.Collection;
 
 public class CyrDeclineCase {
 	private String nameRu;
@@ -17,6 +19,18 @@ public class CyrDeclineCase {
 		this.index = index;
 		this.value = value;
 	}
+	
+	public static Collection<CyrDeclineCase> GetCollection() {
+		ArrayList<CyrDeclineCase> list = new ArrayList<CyrDeclineCase>();
+		list.add(Nominative());
+		list.add(Genitive());
+		list.add(Dative());
+		list.add(Accusative());
+		list.add(Instrumental());
+		list.add(Prepositional());
+		
+        return list;
+    }
 	
 	public String getNameRu() {
 		return this.nameRu;

@@ -32,6 +32,10 @@ public class CyrNameResult {
 		if (values.length != 2 && values.length != 3){
 			throw new ArrayIndexOutOfBoundsException();
 		}
+		
+        this.surname = values[0];
+        this.name = values[1];
+        this.patronumic = values.length == 3 ? values[2] : null;
 	}
 	/**
 	 * {@link CyrNameResult#name} +  {@link CyrNameResult#surname} + {@link CyrNameResult#patronumic}

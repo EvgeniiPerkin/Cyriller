@@ -39,10 +39,34 @@ public class CyrName {
 		return result;
 	}
 	public CyrResult Decline(String surname, String name, String patronumic, GendersEnum gender, boolean shorten) {
-		return null;
+		String[] cases = new String[6];
+
+        for (CyrDeclineCase c : CyrDeclineCase.GetCollection())  {
+            int caseIndex = c.getIndex();
+            String[] values = this.Decline(surname, name, patronumic, caseIndex, gender.value, shorten);
+            CyrNameResult caseResult = new CyrNameResult(values);
+
+            cases[caseIndex - 1] = caseResult.toString();
+        }
+
+        CyrResult result = new CyrResult(cases);
+
+        return result;
 	}
 	public CyrResult Decline(String fullName, GendersEnum gender, boolean shorten) {
-		return null;
+		String[] cases = new String[6];
+
+        for (CyrDeclineCase c : CyrDeclineCase.GetCollection())  {
+            int caseIndex = c.getIndex();
+            String[] values = this.Decline(fullName, caseIndex, gender.value, shorten);
+            CyrNameResult caseResult = new CyrNameResult(values);
+
+            cases[caseIndex - 1] = caseResult.toString();
+        }
+
+        CyrResult result = new CyrResult(cases);
+
+        return result;
 	}
 	/**
 	 * Склоняет полное имя в указанный падеж.
@@ -160,7 +184,7 @@ public class CyrName {
         }
 
         if (!inputShorten){
-            patronymic = patronymicBefore + patronymic + patronymicAfter;
+            patronymic = (patronymicBefore == null ? "" : patronymicBefore) + patronymic + (patronymicAfter == null ? "" : patronymicAfter);
         }
 
         return new String[] { surname, name, patronymic };
@@ -990,7 +1014,7 @@ public class CyrName {
         if (!isFeminine) {
             switch (end) {
                 case "а":
-                    switch (surname.substring(surname.length() - 2, 1)) {
+                    switch (surname.substring(surname.length() - 2, surname.length() - 1)) {
                         case "а":
                         case "е":
                         case "ё":
@@ -1045,7 +1069,7 @@ public class CyrName {
         else {
             switch (end) {
                 case "а":
-                    switch (surname.substring(surname.length() - 2, 1)) {
+                    switch (surname.substring(surname.length() - 2, surname.length() - 1)) {
 	                    case "а":
 	                    case "е":
 	                    case "ё":
@@ -1206,7 +1230,7 @@ public class CyrName {
         if (!isFeminine) {
             switch (end) {
                 case "а":
-                    switch (surname.substring(surname.length() - 2, 1)) {
+                    switch (surname.substring(surname.length() - 2, surname.length() - 1)) {
                         case "а":
                         case "е":
                         case "ё":
@@ -1263,7 +1287,7 @@ public class CyrName {
         else {
             switch (end) {
                 case "а":
-                    switch (surname.substring(surname.length() - 2, 1)) {
+                    switch (surname.substring(surname.length() - 2, surname.length() - 1)) {
                         case "а":
                         case "е":
                         case "ё":
@@ -1385,7 +1409,7 @@ public class CyrName {
         if (!isFeminine) {
             switch (end) {
                 case "а":
-                    switch (surname.substring(surname.length() - 2, 1)) {
+                    switch (surname.substring(surname.length() - 2, surname.length() - 1)) {
 	                    case "а":
 	                    case "е":
 	                    case "ё":
@@ -1440,7 +1464,7 @@ public class CyrName {
         else {
             switch (end) {
                 case "а":
-                    switch (surname.substring(surname.length() - 2, 1)) {
+                    switch (surname.substring(surname.length() - 2, surname.length() - 1)) {
 	                    case "а":
 	                    case "е":
 	                    case "ё":
@@ -1579,7 +1603,7 @@ public class CyrName {
         if (!isFeminine) {
             switch (end) {
                 case "а":
-                    switch (surname.substring(surname.length() - 2, 1)) {
+                    switch (surname.substring(surname.length() - 2, surname.length() - 1)) {
 	                    case "а":
 	                    case "е":
 	                    case "ё":
@@ -1634,7 +1658,7 @@ public class CyrName {
         else {
             switch (end) {
                 case "а":
-                    switch (surname.substring(surname.length() - 2, 1)) {
+                    switch (surname.substring(surname.length() - 2, surname.length() - 1)) {
 	                    case "а":
 	                    case "е":
 	                    case "ё":
@@ -1782,7 +1806,7 @@ public class CyrName {
         if (!isFeminine) {
             switch (end) {
                 case "а":
-                    switch (surname.substring(surname.length() - 2, 1)) {
+                    switch (surname.substring(surname.length() - 2, surname.length() - 1)) {
 	                    case "а":
 	                    case "е":
 	                    case "ё":
@@ -1837,7 +1861,7 @@ public class CyrName {
         else {
             switch (end) {
                 case "а":
-                    switch (surname.substring(surname.length() - 2, 1)) {
+                    switch (surname.substring(surname.length() - 2, surname.length() - 1)) {
 	                    case "а":
 	                    case "е":
 	                    case "ё":
