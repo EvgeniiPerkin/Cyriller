@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 
 public class CyrNameResult {
 	
@@ -42,11 +43,21 @@ public class CyrNameResult {
 	 * @return полное имя
 	 */
 	public String getFullName(){
-		String[] values = new String[] {
-				this.surname, this.name, this.patronumic
-		};
+		ArrayList<String> results = new ArrayList<String>();
 		
-		String fullname = String.join(" ", values);
+		if (this.surname != null && !this.surname.isEmpty()) {
+			results.add(this.surname);
+		}
+		
+		if (this.name != null && !this.name.isEmpty()) {
+			results.add(this.name);
+		}
+		
+		if (this.patronumic != null && !this.patronumic.isEmpty()) {
+			results.add(this.patronumic);
+		}
+		
+		String fullname = String.join(" ", results);
 		
 		return fullname;
 	}

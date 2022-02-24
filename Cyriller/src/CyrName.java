@@ -1345,7 +1345,7 @@ public class CyrName {
 	            case "ева":
 	            case "ина":
 	            case "ына":
-                    surname = SetEnd(surname, "y");
+                    surname = SetEnd(surname, "у");
                     break;
                 case "ска":
                 case "цка":
