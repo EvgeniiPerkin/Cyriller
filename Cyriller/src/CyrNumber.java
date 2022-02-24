@@ -125,6 +125,11 @@ public class CyrNumber {
      * @return
      */
     public String toString(double value, CasesEnum cases, GendersEnum gender, AnimatesEnum animate) {
+    	String str = Double.toString(value);
+    	String[] parts = str.split(".");
+    	String sb = "";
+        Strings s = new Strings(cases, gender, animate);
+    	
     	return "";
     }
     public String toString(double value, CasesEnum cases, Currency currency) {
