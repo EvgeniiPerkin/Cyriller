@@ -228,11 +228,11 @@ public class CyrNumber {
         long i = (long)value;
         StringBuilder sb = new StringBuilder();
         //Strings s = new Strings(Case, Item.Gender, Item.Animate);
-        GendersEnum gender = i < value ? GendersEnum.Feminine : item.Gender;
-        AnimatesEnum animate = i == value && i < 20 ? item.Animate : AnimatesEnum.Inanimated;
+        GendersEnum gender = i < value ? GendersEnum.Feminine : item.getGender();
+        AnimatesEnum animate = i == value && i < 20 ? item.GetAnimate() : AnimatesEnum.Inanimated;
         String[] name;
 
-        sb.append(this.toString(value, cases, gender, animate)).Append(" ");
+        sb.append(this.toString(value, cases, gender, animate)).append(" ");
 
         if (i < value) {
             name = item.GetName(CasesEnum.Nominative, i);
@@ -256,7 +256,7 @@ public class CyrNumber {
      */
     public String toString(long value, CasesEnum cases, GendersEnum gender, AnimatesEnum animate) {
     	if (value > MaxValue) {
-            throw new ArgumentOutOfRangeException();
+            throw new IllegalArgumentException();
         }
 
         Strings s = new Strings(cases, gender, animate);
@@ -283,7 +283,7 @@ public class CyrNumber {
         v = value / 1000000;
 
         if (v > 0) {
-            r.append(this.toString(v, cases, GendersEnum.Masculine, animate)).append(" ").Append(this.Case(v, s.getMillion()[0], s.getMillion()[1], s.getMillion()[2])).append(" ");
+            r.append(this.toString(v, cases, GendersEnum.Masculine, animate)).append(" ").append(this.Case(v, s.getMillion()[0], s.getMillion()[1], s.getMillion()[2])).append(" ");
             value = value - 1000000 * v;
         }
 
@@ -297,21 +297,21 @@ public class CyrNumber {
         v = value / 100;
 
         if (v > 0) {
-            r.append(s.getHundreds()[v - 1]).append(" ");
+            r.append(s.getHundreds()[(int)v - 1]).append(" ");
             value = value - 100 * v;
         }
 
         if (value >= 20 || value == 10) {
             v = value / 10;
-            r.append(s.getTens()[v - 1]).append(" ");
+            r.append(s.getTens()[(int)v - 1]).append(" ");
             value = value - v * 10;
         }
 
         if (value > 0) {
-            r.append(s.getNumbers()[value - 1]);
+            r.append(s.getNumbers()[(int)value - 1]);
         }
 
-        return r.toString().trim(" ");
+        return r.toString().trim();
     } 
     /**
      * Выбирает правильный вариант слова в зависимости от указанного числа.

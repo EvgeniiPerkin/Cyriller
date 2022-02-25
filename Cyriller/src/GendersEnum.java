@@ -10,11 +10,9 @@ public enum GendersEnum {
 	Neuter(3);
     public final int value;
 
-
     GendersEnum(int value){
         this.value = value;
     }
-
 
     public int getValue() {
         return value;

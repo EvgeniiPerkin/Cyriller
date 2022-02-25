@@ -14,11 +14,9 @@ public enum CasesEnum {
     Prepositional(6);
     public final int value;
 
-
     CasesEnum(int value){
         this.value = value;
     }
-
 
     public int getValue() {
         return value;
