@@ -14,7 +14,7 @@ public class Main {
 		}
 		
 		CyrNumber cyrNumber = new CyrNumber();
-		double value = (double)Integer.MAX_VALUE / 100;;
+		double value = 1565456.1556;;
         result = cyrNumber.Decline(value, new RurCurrency());
         String[] df = result.ToArray();
         

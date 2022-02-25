@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 
 public class CyrNumber {
 	/**Максимальное число для написания прописью*/
@@ -126,7 +127,7 @@ public class CyrNumber {
      */
     public String toString(double value, CasesEnum cases, GendersEnum gender, AnimatesEnum animate) {
     	String str = Double.toString(value);
-    	String[] parts = str.split(".");
+    	String[] parts = str.split("\\.");
         long i = Long.parseLong(parts[0], 10);
         StringBuilder sb = new StringBuilder();
         Strings s = new Strings(cases, gender, animate);
@@ -178,7 +179,7 @@ public class CyrNumber {
      */
     public String toString(double value, CasesEnum cases, Currency currency) {
     	String str = Double.toString(value);
-        String[] parts = str.split(".");
+        String[] parts = str.split("\\.");
         long i = Long.parseLong(parts[0], 10);
         StringBuilder sb = new StringBuilder();
         Strings s = new Strings(cases, currency.getIntegerGender(), AnimatesEnum.Inanimated);
@@ -200,10 +201,14 @@ public class CyrNumber {
             }
 
             if (v.length() > currency.getDecimals()) {
-                //ArrayList<char> chars = v.ToCharArray().ToList();
+            	ArrayList<String> chars = new ArrayList<String>();
+            	
+            	for (char c : v.toCharArray()) {
+            	  chars.add(String.valueOf(c));
+            	}
 
-                //chars.Insert(currency.Decimals, '.');
-                //v = string.Join(string.Empty, chars.ToArray());
+                chars.add(currency.getDecimals(), ".");
+                v = String.join("", chars);
             }
 
             long d = (long)Math.round(Double.parseDouble(v));
