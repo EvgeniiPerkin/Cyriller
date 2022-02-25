@@ -1,3 +1,4 @@
+import java.math.BigDecimal;
 import java.util.ArrayList;
 
 public class CyrNumber {
@@ -36,7 +37,7 @@ public class CyrNumber {
      * @param value
      * @return
      */
-    public CyrResult Decline(double value)
+    public CyrResult Decline(BigDecimal value)
     {
         return this.Decline(value, GendersEnum.Masculine, AnimatesEnum.Inanimated);
     }
@@ -47,7 +48,7 @@ public class CyrNumber {
      * @param animate
      * @return
      */
-    public CyrResult Decline(double value, GendersEnum gender, AnimatesEnum animate)
+    public CyrResult Decline(BigDecimal value, GendersEnum gender, AnimatesEnum animate)
     {
         CyrResult result = new CyrResult(
             this.toString(value, CasesEnum.Nominative, gender, animate),
@@ -66,7 +67,7 @@ public class CyrNumber {
      * @param currency
      * @return
      */
-    public CyrResult Decline(double value, Currency currency) {
+    public CyrResult Decline(BigDecimal value, Currency currency) {
         CyrResult result = new CyrResult(
             this.toString(value, CasesEnum.Nominative, currency),
             this.toString(value, CasesEnum.Genitive, currency),
@@ -84,7 +85,7 @@ public class CyrNumber {
      * @param item
      * @return
      */
-    public CyrResult Decline(double value, Item item)
+    public CyrResult Decline(BigDecimal value, Item item)
     {
         CyrResult result = new CyrResult(
             this.toString(value, CasesEnum.Nominative, item),
@@ -113,7 +114,7 @@ public class CyrNumber {
      * @param cases
      * @return
      */
-    public String toString(double value, CasesEnum cases)
+    public String toString(BigDecimal value, CasesEnum cases)
     {
         return this.toString(value, cases, GendersEnum.Masculine, AnimatesEnum.Inanimated);
     }
@@ -125,8 +126,8 @@ public class CyrNumber {
      * @param animate
      * @return
      */
-    public String toString(double value, CasesEnum cases, GendersEnum gender, AnimatesEnum animate) {
-    	String str = Double.toString(value);
+    public String toString(BigDecimal value, CasesEnum cases, GendersEnum gender, AnimatesEnum animate) {
+    	String str = String.valueOf(value);
     	String[] parts = str.split("\\.");
         long i = Long.parseLong(parts[0], 10);
         StringBuilder sb = new StringBuilder();
@@ -177,8 +178,8 @@ public class CyrNumber {
      * @param currency
      * @return
      */
-    public String toString(double value, CasesEnum cases, Currency currency) {
-    	String str = Double.toString(value);
+    public String toString(BigDecimal value, CasesEnum cases, Currency currency) {
+    	String str = value.toString();
         String[] parts = str.split("\\.");
         long i = Long.parseLong(parts[0], 10);
         StringBuilder sb = new StringBuilder();
@@ -228,18 +229,21 @@ public class CyrNumber {
      * @param item
      * @return
      */
-    public String toString(double value, CasesEnum cases, Item item) {
+    public String toString(BigDecimal value, CasesEnum cases, Item item) {
 
-        long i = (long)value;
+        long i = value.longValue();
+        BigDecimal bg = new BigDecimal(i);
+        int res = bg.compareTo(value);;
+        
         StringBuilder sb = new StringBuilder();
-        //Strings s = new Strings(Case, Item.Gender, Item.Animate);
-        GendersEnum gender = i < value ? GendersEnum.Feminine : item.getGender();
-        AnimatesEnum animate = i == value && i < 20 ? item.GetAnimate() : AnimatesEnum.Inanimated;
+
+        GendersEnum gender = res == -1 ? GendersEnum.Feminine : item.getGender();
+        AnimatesEnum animate = res == 0 && i < 20 ? item.GetAnimate() : AnimatesEnum.Inanimated;
         String[] name;
 
         sb.append(this.toString(value, cases, gender, animate)).append(" ");
 
-        if (i < value) {
+        if (res == -1) {
             name = item.GetName(CasesEnum.Nominative, i);
             sb.append(name[1]);
         }

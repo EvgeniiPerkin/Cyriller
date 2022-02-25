@@ -1,4 +1,4 @@
-
+import java.math.BigDecimal;
 
 public class Main {
 
@@ -14,8 +14,8 @@ public class Main {
 		}
 		
 		CyrNumber cyrNumber = new CyrNumber();
-		long value = 151231233L;;
-        result = cyrNumber.Decline(value, new RurCurrency());
+		BigDecimal value = new BigDecimal("1986122223.123");
+        result = cyrNumber.Decline(value, new EurCurrency());
         String[] df = result.ToArray();
         
         for(String d : df) {
