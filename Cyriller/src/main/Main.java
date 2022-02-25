@@ -1,7 +1,6 @@
 package main;
 
 import java.math.BigDecimal;
-
 import Currencies.RurCurrency;
 import DeclensionOfNames.CyrName;
 import DeclinationOfDigit.CyrNumber;
