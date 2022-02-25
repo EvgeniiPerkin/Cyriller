@@ -12,6 +12,15 @@ public class Main {
 		for(String d : k) {
 			System.out.println(d);
 		}
+		
+		CyrNumber cyrNumber = new CyrNumber();
+		double value = (double)Integer.MAX_VALUE / 100;;
+        result = cyrNumber.Decline(value, new RurCurrency());
+        String[] df = result.ToArray();
+        
+        for(String d : df) {
+			System.out.println(d);
+		}
 	}
 
 }
