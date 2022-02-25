@@ -14,8 +14,8 @@ public class Main {
 		}
 		
 		CyrNumber cyrNumber = new CyrNumber();
-		BigDecimal value = new BigDecimal("1986122223.123");
-        result = cyrNumber.Decline(value, new EurCurrency());
+		BigDecimal value = new BigDecimal("8100000.00");
+        result = cyrNumber.Decline(value, new RurCurrency());
         String[] df = result.ToArray();
         
         for(String d : df) {

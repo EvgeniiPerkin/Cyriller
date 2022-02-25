@@ -183,7 +183,7 @@ public class CyrNumber {
         String[] parts = str.split("\\.");
         long i = Long.parseLong(parts[0], 10);
         StringBuilder sb = new StringBuilder();
-        Strings s = new Strings(cases, currency.getIntegerGender(), AnimatesEnum.Inanimated);
+
         String[] iname = currency.GetIntegerName(cases);
         String[] dname = currency.GetDecimalName(cases);
 
