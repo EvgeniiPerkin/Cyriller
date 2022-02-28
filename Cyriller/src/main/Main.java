@@ -6,9 +6,7 @@ import DeclensionOfNames.CyrName;
 import DeclinationOfDigit.CyrNumber;
 import Enums.GendersEnum;
 
-public class Main {
-
-    
+public class Main {    
 	public static void main(String[] args) {
 		CyrName cyrName = new CyrName();
         String name = "Илона МакФерсона";
@@ -27,7 +25,7 @@ public class Main {
         for(String d : df) {
 			System.out.println(d);
 		}
-        /*asdfasdfxcvzxcvasdf*/
+        /*asdfasdfxcsdfvzxcvasdf*/
 	}
 
 }
